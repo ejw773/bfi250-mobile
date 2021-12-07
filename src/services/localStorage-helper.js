@@ -1,8 +1,9 @@
 const localStorageHelper = async (key, value) => {
     try {
-        const dataStore = JSON.parse(localStorage.getItem('user'))
+        //const dataStore = JSON.parse(localStorage.getItem('user'))
+        const dataStore = {}
         dataStore[key] = value
-        localStorage.setItem("user", JSON.stringify(dataStore))
+        // localStorage.setItem("user", JSON.stringify(dataStore))
     } catch (e) {
         console.log(e)
     }

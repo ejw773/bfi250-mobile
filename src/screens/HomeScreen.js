@@ -26,7 +26,7 @@ const Home = () => {
 //     //   }
     
         return (
-          <div>
+          <View>
             {/* <div className="fixed-top">
               <ProgressBar 
                 totalFilms={totalFilms}
@@ -46,7 +46,7 @@ const Home = () => {
             } */}
             <View><Text>Hello</Text></View>
             <RenderCards />
-          </div>
+          </View>
         )
     //   } 
     
