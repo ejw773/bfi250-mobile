@@ -2,7 +2,6 @@ import React from 'react';
 import { Badge } from 'react-native-elements'
 
 const BadgeComponent = ({status}) => {
-    console.log(status)
   let badgeStatus = 'warning'
   let badgeMessage = 'To See'
   if (status === false) {

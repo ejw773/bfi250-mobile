@@ -5,7 +5,7 @@ import getFilms from '../redux/actions/films';
 import { getSeenStatus } from '../redux/actions/seen_status_actions';
 import ProgressBar from '../components/ProgressBar/ProgressBar';
 import RenderCards from '../components/RenderCards';
-// import Loading from './Loading';
+import Loading from '../components/LoadingComponent';
 
 // import { Redirect } from 'react-router-dom'; -- look for alternative
 
@@ -41,7 +41,7 @@ const Home = () => {
 
   if (films.length === 0) {
       return (
-          <View><Text>{showSet.showSet}</Text></View>
+          <Loading />
       )
   } else {
 
@@ -64,12 +64,10 @@ const Home = () => {
       const filmsSkipped = titlesToSearch.filter(film => seenStatus[film.imdbID]===false);
       const filmsToSee = titlesToSearch.filter(film => typeof (seenStatus[film.imdbID])!=='boolean');
 
-      
-      
   // Perhaps some code to redirect if not logged in?
 
       return (
-        <View>
+        <View style={{ flex: 1 }}>
             <ProgressBar 
               totalFilms={totalFilms}
               totalSeen={totalSeen}
@@ -86,7 +84,6 @@ const Home = () => {
             <RenderCards filmsToDisplay={filmsToSee} /> :
             <RenderCards filmsToDisplay={titlesToSearch} />
           }
-          <View><Text>Hello</Text></View>
           <RenderCards />
         </View>
       )

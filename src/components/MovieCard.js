@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import { Icon, Badge } from 'react-native-elements';
 import Buttons from './ButtonsComponent'
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import BadgeComponent from './BadgeComponent'
 
 const MovieCard = ({item, status}) => {

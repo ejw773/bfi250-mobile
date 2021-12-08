@@ -52,6 +52,7 @@ export const deleteSeenStatus = (film, seenStatus) => (dispatch) => {
 }
 
 export const toggleSeenStatus = (film, seenStatus) => (dispatch) => {
+    console.log(film, seenStatus)
     return SeenStatusService.updateSeenStatus(film, seenStatus).then(
         (response) => {
             dispatch({

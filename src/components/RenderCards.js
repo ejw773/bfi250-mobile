@@ -1,28 +1,39 @@
 import React from 'react';
-import { SafeAreaView, View, Text, FlatList } from 'react-native'
+import { useSelector } from 'react-redux';
+import { SafeAreaView, FlatList } from 'react-native'
 import MovieCard from './MovieCard'
+import Empty from './EmptyComponent'
 
 const RenderCards = ({ filmsToDisplay }) => {
-    console.log(filmsToDisplay)
-    return (
-        <SafeAreaView>
-            <View>
-                <Text>Render Cards</Text>
-            </View>
-            <FlatList
-            data={ filmsToDisplay }
-            renderItem={({ item })=>((
-                <MovieCard
-                item={item}
-                // status={status.[item.imdbID]}
-                status={null}
+    let status = {}
+    const seenStatus = useSelector((state) => state.seenStatus.seenStatus)
+    if (seenStatus) {
+        status = seenStatus
+    }
+    const emptyOrNot = filmsToDisplay?.length
+    console.log(emptyOrNot)
+    if (emptyOrNot !== undefined && emptyOrNot > 0) {
+        return (
+            <SafeAreaView>
+                <FlatList
+                contentContainerStyle={{ paddingBottom: 100 }}
+                data={ filmsToDisplay }
+                renderItem={({ item })=>((
+                    <MovieCard
+                    item={item}
+                    status={status[item.imdbID]}
+                    />
+                ))}
+                keyExtractor={item => item.title}
+                extraData={status}
                 />
-            ))}
-            keyExtractor={item => item.title}
-            // extraData={status}
-            />
-        </SafeAreaView>
+            </SafeAreaView>
+        )    
+    } else {
+        return (
+            <Empty />
         )
+    }
 }
 
 export default RenderCards;

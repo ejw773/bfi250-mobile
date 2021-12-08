@@ -15,7 +15,7 @@ const Main = () => {
     return (
         <NavigationContainer>
         <Tab.Navigator initialRouteName="Home">
-          <Tab.Screen name="Home" component={Home} options={{ title: 'Progress Bar'}}/>
+          <Tab.Screen name="Home" component={Home} options={{ title: 'BFI 250 Progress Bar'}}/>
           <Tab.Screen name="Profile" component={Profile} />
           <Tab.Screen name="Login" component={Login} />
         </Tab.Navigator>

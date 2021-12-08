@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default function showSet(state = initialState, action) {
-    console.log('change show set reducer fired')
     switch(action.type) {
         case CHANGE_SHOW_SET: {
             return {

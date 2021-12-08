@@ -1,9 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Button, Icon } from 'react-native-elements'
-import FAIcon from 'react-native-vector-icons/FontAwesome';
-// import { toggleStatus } from '../redux/statusSlice'
+import { View, StyleSheet } from 'react-native';
+import { toggleSeenStatus, deleteSeenStatus } from '../redux/actions/seen_status_actions'
 import SeenButton from './Buttons/SeenButtonComponent';
 import UnseenButton from './Buttons/UnseenButtonComponent'
 import SkipButton from './Buttons/SkipButtonComponent'
@@ -11,29 +9,32 @@ import UnskipButton from './Buttons/UnskipButtonComponent'
 
 const Buttons = ({ status, imdbID }) => {
   const dispatch = useDispatch();
-  const handlePress = (status) => {
-    let payload = {
-      imdbID,
-      status
-    };
-    //dispatch(toggleStatus(payload));
+
+  const handleToggle = (status) => {
+    dispatch(toggleSeenStatus(imdbID, status));
   }
+
+  const handleDelete = () => {
+    console.log(`Deleting: ${imdbID}`)
+    dispatch(deleteSeenStatus(imdbID, null))
+  }
+
   return (
     status===true
     ? 
     <View style={styles.buttonGroupStyle}>
-      <UnseenButton handlePress={handlePress} />
+      <UnseenButton handlePress={handleDelete} />
     </View>
     :
     status===false
     ?
     <View style={styles.buttonGroupStyle}>
-      <UnskipButton handlePress={handlePress} />
+      <UnskipButton handlePress={handleDelete} />
     </View>
     :
     <View style={styles.buttonGroupStyle}>
-      <SeenButton handlePress={handlePress} />
-      <SkipButton handlePress={handlePress} />
+      <SeenButton handlePress={handleToggle} />
+      <SkipButton handlePress={handleToggle} />
     </View>
 
   )
