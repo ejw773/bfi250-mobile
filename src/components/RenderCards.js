@@ -25,7 +25,7 @@ const RenderCards = () => {
 
     if (films.length === 0) {
         return (
-            <View><Text>Loading...</Text></View>
+            <View><Text>{showSet.showSet}</Text></View>
         )
     } else {
 
