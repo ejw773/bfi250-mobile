@@ -2,14 +2,15 @@ import React from 'react';
 import { SafeAreaView, View, Text, FlatList } from 'react-native'
 import MovieCard from './MovieCard'
 
-const RenderCards = ({ films }) => {
+const RenderCards = ({ filmsToDisplay }) => {
+    console.log(filmsToDisplay)
     return (
         <SafeAreaView>
             <View>
                 <Text>Render Cards</Text>
             </View>
             <FlatList
-            data={ films }
+            data={ filmsToDisplay }
             renderItem={({ item })=>((
                 <MovieCard
                 item={item}
