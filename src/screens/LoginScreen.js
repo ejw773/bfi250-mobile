@@ -5,6 +5,7 @@ const Login = () => {
     return (
         <View>
             <Text>Login Screen</Text>
+            <Text>Get This Working on Wednesday!!!</Text>
         </View>
     )
 }
