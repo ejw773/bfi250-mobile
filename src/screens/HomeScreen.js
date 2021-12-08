@@ -10,6 +10,13 @@ import RenderCards from '../components/RenderCards';
 // import Loading from './Loading';
 
 const Home = () => {
+    const user = useSelector((state) => state.auth)
+    // const filmSet = user?.user?.filmSet
+    const filmSet = 'bfi1952'
+    const showSet = useSelector((state => state.showSet))
+    const searchTitle = useSelector((state) => state.searchTitle.title)
+
+
     const dispatch = useDispatch()
   
     useEffect(() => {
@@ -20,10 +27,50 @@ const Home = () => {
         dispatch(getSeenStatus())
     }, [dispatch])
 
-  
-//     // if (!user?.isLoggedIn) {
-//     //     return <Redirect to="/login" />;
-//     //   }
+    let films = []
+    const allFilms = useSelector((state) => state?.movieData?.films)
+    if (allFilms) {
+        films = allFilms[filmSet]
+    }
+
+    let seenStatus = {}
+    const allSeenStatus = useSelector((state) => state.seenStatus.seenStatus)
+    if (allSeenStatus) {
+        seenStatus = allSeenStatus
+    }
+
+
+    if (films.length === 0) {
+        return (
+            <View><Text>{showSet.showSet}</Text></View>
+        )
+    } else {
+
+        let totalFilms = 0
+        let totalSeen = 0
+        let totalSkipped = 0
+        let totalUnseen = 0
+
+
+        if (films.length !== 0) {
+            totalFilms = films.length
+            totalSeen = films.filter(film => seenStatus[film.imdbID]===true).length;
+            totalSkipped = films.filter(film => seenStatus[film.imdbID]===false).length;
+            totalUnseen = films.filter(film => typeof (seenStatus[film.imdbID])!=='boolean').length;
+        }
+
+        const showTheseFilms = showSet.showSet;
+        const titlesToSearch = films.filter(film => film.title.toLowerCase().includes(searchTitle.toLowerCase()))
+        const filmsSeen = titlesToSearch.filter(film => seenStatus[film.imdbID]===true);
+        const filmsSkipped = titlesToSearch.filter(film => seenStatus[film.imdbID]===false);
+        const filmsToSee = titlesToSearch.filter(film => typeof (seenStatus[film.imdbID])!=='boolean');
+
+
+
+
+
+
+    // Perhaps some code to redirect if not logged in?
     
         return (
           <View>
@@ -35,20 +82,20 @@ const Home = () => {
                 totalUnseen={totalUnseen}
               />
             </div> */}
-            {/* {
+            {
               showTheseFilms==='view-seen' ?
-              <RenderCards BFI={filmsSeen} /> :
+              <RenderCards films={filmsSeen} /> :
               showTheseFilms==='view-skipped' ?
-              <RenderCards BFI={filmsSkipped} /> :
+              <RenderCards films={filmsSkipped} /> :
               showTheseFilms==='view-tosee' ?
-              <RenderCards BFI={filmsToSee} /> :
-              <RenderCards BFI={titlesToSearch} />
-            } */}
+              <RenderCards films={filmsToSee} /> :
+              <RenderCards films={titlesToSearch} />
+            }
             <View><Text>Hello</Text></View>
             <RenderCards />
           </View>
         )
-    //   } 
+      } 
     
 }
 
