@@ -11,7 +11,6 @@ const RenderCards = ({ filmsToDisplay }) => {
         status = seenStatus
     }
     const emptyOrNot = filmsToDisplay?.length
-    console.log(emptyOrNot)
     if (emptyOrNot !== undefined && emptyOrNot > 0) {
         return (
             <SafeAreaView>

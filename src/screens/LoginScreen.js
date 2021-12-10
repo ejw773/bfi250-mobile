@@ -15,36 +15,36 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const handleLogin = () => {
-         if (remember) {
-            SecureStore.setItemAsync(
-                'userinfo',
-                JSON.stringify({
-                    email,
-                    password
-                })
-            ).catch(error => console.log('Could not save user info', error));
-        } else {
-            SecureStore.deleteItemAsync('userinfo').catch(
-                error => console.log('Could not delete user info', error)
-            );
-        }
+        //  if (remember) {
+        //     SecureStore.setItemAsync(
+        //         'userinfo',
+        //         JSON.stringify({
+        //             email,
+        //             password
+        //         })
+        //     ).catch(error => console.log('Could not save user info', error));
+        // } else {
+        //     SecureStore.deleteItemAsync('userinfo').catch(
+        //         error => console.log('Could not delete user info', error)
+        //     );
+        // }
         dispatch(login(email, password))
         .then(() => {
-            
+
         })
     }
 
-    useEffect(() => {
-        SecureStore.getItemAsync('userinfo')
-        .then(userData => {
-            const userInfo =JSON.parse(userData);
-            if (userInfo) {
-                setEmail(userInfo.email);
-                setPassword(userInfo.password);
-                setRemember(true)
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     SecureStore.getItemAsync('userinfo')
+    //     .then(userData => {
+    //         const userInfo =JSON.parse(userData);
+    //         if (userInfo) {
+    //             setEmail(userInfo.email);
+    //             setPassword(userInfo.password);
+    //             setRemember(true)
+    //         }
+    //     })
+    // }, [])
     
     return (
         <View style={styles.container}>

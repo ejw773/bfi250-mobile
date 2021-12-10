@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { masterColor } from '../globalSettings/color';
 
 function Empty() {
-    console.log(`Master Color: ${masterColor}`)
     return (
         <View style={styles.loadingView}>
             <Text style={styles.loadingText}>Nothing to See Here....</Text>

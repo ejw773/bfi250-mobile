@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL } from '../api/apiUrl';
 import authHeader from './auth-header';
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import localStorageHelper from './localStorage-helper'
 
 const register = (name, email, password) => {
@@ -28,12 +28,12 @@ const login = (email, password) => {
     })
     .then((response) => {
       if (response.data.token) {
-        SecureStore.setItemAsync(
+        AsyncStorage.setItem(
           'user',
           JSON.stringify(response.data)
         )
-        //localStorage.setItem("user", JSON.stringify(response.data));
       }
+      console.log(response.data.token)
       return response.data;
     });
 };
