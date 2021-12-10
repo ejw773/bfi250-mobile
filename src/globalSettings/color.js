@@ -1,0 +1,1 @@
+export const masterColor = '#DCA57D'

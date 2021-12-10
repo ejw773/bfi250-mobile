@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_URL } from '../api/apiUrl';
 import authHeader from './auth-header';
+import * as SecureStore from 'expo-secure-store';
 import localStorageHelper from './localStorage-helper'
 
 const register = (name, email, password) => {
@@ -27,6 +28,10 @@ const login = (email, password) => {
     })
     .then((response) => {
       if (response.data.token) {
+        SecureStore.setItemAsync(
+          'user',
+          JSON.stringify(response.data)
+        )
         //localStorage.setItem("user", JSON.stringify(response.data));
       }
       return response.data;
