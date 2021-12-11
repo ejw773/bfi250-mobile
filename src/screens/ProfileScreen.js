@@ -1,61 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Button, StyleSheet, Text, Modal } from 'react-native';
 import { Input, CheckBox } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../globalSettings/color'
 import { login } from '../redux/actions/auth';
+import AuthModal from '../components/auth/AuthModal'
 import LoginModal from '../components/auth/LoginModal'
 import RegisterModal from '../components/auth/RegisterModal'
 
+
 const Profile = () => {
-    const [showLogin, setShowLogin] = useState(false)
-    const [showRegister, setShowRegister] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [remember, setRemember] = useState(false);
-
-    const dispatch = useDispatch();
-
-
-    const toggleLogin = () => {
-        setShowLogin(!showLogin)
-        console.log(showLogin)
-    }
-    const toggleRegister = () => {
-        setShowRegister(!showRegister)
-        console.log(showRegister)
-    }
-
+    const auth = useSelector((state) => state.auth)
+    console.log(auth)
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
 
     return (
         <View style={styles.container}>
-            <Text>Log In Or Register</Text>
-            <View style={styles.formButton}>
-                <Button
-                    onPress={() => toggleLogin()}
-                    title="Log In"
-                    color={masterColor}
-                />
-            </View>
-            <View style={styles.formButton}>
-                <Button
-                    onPress={() => toggleRegister()}
-                    title="Register"
-                    color={masterColor}
-                />
-            </View>
-            <LoginModal 
-                showLogin={showLogin}
-                toggleLogin={toggleLogin}
+            <AuthModal 
+                isLoggedIn={isLoggedIn}
             />
-            <RegisterModal
-                showRegister={showRegister}
-                toggleRegister={toggleRegister}
-            />
+            <Text>This is the Profile screen</Text>
         </View>
     )
 }
