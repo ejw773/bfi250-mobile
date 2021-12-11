@@ -12,7 +12,6 @@ import Loading from '../components/LoadingComponent';
 const Home = () => {
   const user = useSelector((state) => state.auth)
   if (!user.token) {
-    console.log('not logged in')
     
   }
   // const filmSet = user?.user?.filmSet

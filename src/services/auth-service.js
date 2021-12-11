@@ -34,17 +34,14 @@ const login = (email, password) => {
           JSON.stringify(response.data)
         )
       }
-      console.log(response.data.token)
       return response.data;
     });
 };
 
 export const logout = () => {
-  console.log('removing user')
   return axios
     .post(API_URL + "users/logout", null, { headers: authHeader() })
     .then((response) => {
-      console.log(response.data)
       try {
         AsyncStorage.removeItem('user')
         AsyncStorage.removeItem('films')
@@ -58,7 +55,6 @@ const logoutAll = () => {
   return axios
     .post(API_URL + "users/logoutAll", null, { headers: authHeader() })
     .then((response) => {
-      console.log(response.data)
       try {
         AsyncStorage.removeItem('user')
         AsyncStorage.removeItem('films')
@@ -99,7 +95,6 @@ const changePassword = (newPassword) => {
   return axios
     .patch(API_URL + "users/me", {password: newPassword}, { headers: authHeader() })
     .then((response) => {
-      console.log(response)
       return response
     })
 }
@@ -108,7 +103,6 @@ const deleteAccount = () => {
   return axios
     .delete(API_URL + "users/me", { headers: authHeader() })
     .then((response) => {
-      console.log(response)
       try {
         AsyncStorage.removeItem('user')
         AsyncStorage.removeItem('films')

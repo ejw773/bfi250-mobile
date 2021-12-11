@@ -1,15 +1,16 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT_ALL,
-    LOGOUT,
-    CHANGE_EMAIL,
-    CHANGE_NAME,
-    CHANGE_FILM_SET,
-    DELETE_ACCOUNT
-  } from "../actionTypes";
+  VERIFY_LOGIN,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_ALL,
+  LOGOUT,
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+  CHANGE_FILM_SET,
+  DELETE_ACCOUNT
+} from "../actionTypes";
   
   // let user = {}
   // const user = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +38,12 @@ import {
     const { type, payload } = action;
   
     switch (type) {
+      case VERIFY_LOGIN:
+        return {
+          ...state,
+          isLoggedIn: payload.isLoggedIn,
+          user: payload.user
+        }
       case REGISTER_SUCCESS:
         return {
           ...state,

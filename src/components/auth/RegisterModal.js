@@ -18,7 +18,6 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
         dispatch(register(name, email, password))
         .then(() => {
             toggleRegister()
-            console.log('logged in')
         })
     }
 

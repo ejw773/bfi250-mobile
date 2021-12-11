@@ -15,7 +15,6 @@ const Buttons = ({ status, imdbID }) => {
   }
 
   const handleDelete = () => {
-    console.log(`Deleting: ${imdbID}`)
     dispatch(deleteSeenStatus(imdbID, null))
   }
 

@@ -1,25 +1,33 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT,
-    SET_MESSAGE,
-    LOGOUT_ALL,
-    DELETE_ACCOUNT    
+  VERIFY_LOGIN,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  SET_MESSAGE,
+  LOGOUT_ALL,
+  DELETE_ACCOUNT    
 } from "../actionTypes";
 
 import AuthService from "../../services/auth-service";
 
+export const verifyLogin = (isLoggedIn, user) => (dispatch) => {
+  console.log(isLoggedIn)
+  console.log(user)
+  dispatch({
+    type: VERIFY_LOGIN,
+    payload: user
+  })
+}
+
 export const register = (username, email, password) => (dispatch) => {
   return AuthService.register(username, email, password).then(
     (response) => {
-      console.log(response)
       dispatch({
         type: REGISTER_SUCCESS,
         payload: { user: response}
       });
-      console.log(response.data)
       dispatch({
         type: SET_MESSAGE,
         payload: "Account Created",
@@ -50,7 +58,6 @@ export const register = (username, email, password) => (dispatch) => {
 };
 
 export const login = (email, password) => (dispatch) => {
-  console.log('login process begun')
   return AuthService.login(email, password).then(
     (data) => {
       dispatch({

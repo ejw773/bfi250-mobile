@@ -17,7 +17,6 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
         dispatch(login(email, password))
         .then(() => {
             toggleLogin()
-            console.log('logged in')
         })
     }
 

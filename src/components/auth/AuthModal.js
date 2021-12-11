@@ -9,9 +9,7 @@ import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 
 const AuthModal = ({ isLoggedIn }) => {
-    console.log(isLoggedIn)
     const auth = useSelector((state) => state.auth)
-    console.log(auth)
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
 
