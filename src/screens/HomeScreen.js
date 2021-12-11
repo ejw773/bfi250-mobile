@@ -11,6 +11,9 @@ import Loading from '../components/LoadingComponent';
 
 const Home = () => {
   const user = useSelector((state) => state.auth)
+  if (!user.token) {
+    
+  }
   // const filmSet = user?.user?.filmSet
   const filmSet = 'bfi1952'
   const showSet = useSelector((state => state.showSet))

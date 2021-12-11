@@ -30,15 +30,6 @@ export default function seenStatus(state = initialState, action) {
                         [film]: seenStatus
                 }
             }
-        // case DELETE_SEEN_STATUS_SUCCESS:
-        //     const films = state.seenStatus
-        //     console.log({films, film})
-        //     delete films[film]
-        //     console.log(films)
-        //     return {
-        //         ...state,
-        //         seenStatus: films
-        //     }
         case GET_SEEN_STATUS_SUCCESS:
             return {
                 ...state,

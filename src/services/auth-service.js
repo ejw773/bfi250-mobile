@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import localStorageHelper from './localStorage-helper'
 
 const register = (name, email, password) => {
-  //localStorage.removeItem("user");
   return axios.post(API_URL + "users", {
     name,
     email,
@@ -13,14 +12,16 @@ const register = (name, email, password) => {
   })
   .then((response) => {
     if (response.data.token) {
-      //localStorage.setItem("user", JSON.stringify(response.data));
+      AsyncStorage.setItem(
+        'user',
+        JSON.stringify(response.data)
+      )
     }
     return response.data
   })
 };
 
 const login = (email, password) => {
-  //localStorage.removeItem("user");
   return axios
     .post(API_URL + "users/login", {
       email,
@@ -33,18 +34,20 @@ const login = (email, password) => {
           JSON.stringify(response.data)
         )
       }
-      console.log(response.data.token)
       return response.data;
     });
 };
 
 export const logout = () => {
-  console.log('removing user')
   return axios
     .post(API_URL + "users/logout", null, { headers: authHeader() })
     .then((response) => {
-      console.log(response.data)
-      //localStorage.removeItem("user");
+      try {
+        AsyncStorage.removeItem('user')
+        AsyncStorage.removeItem('films')
+      } catch (e) {
+        console.log(e)
+      }
     })
 };
 
@@ -52,8 +55,12 @@ const logoutAll = () => {
   return axios
     .post(API_URL + "users/logoutAll", null, { headers: authHeader() })
     .then((response) => {
-      console.log(response.data)
-      //localStorage.removeItem("user");
+      try {
+        AsyncStorage.removeItem('user')
+        AsyncStorage.removeItem('films')
+      } catch (e) {
+        console.log(e)
+      }
     })
 }
 
@@ -88,7 +95,6 @@ const changePassword = (newPassword) => {
   return axios
     .patch(API_URL + "users/me", {password: newPassword}, { headers: authHeader() })
     .then((response) => {
-      console.log(response)
       return response
     })
 }
@@ -97,8 +103,12 @@ const deleteAccount = () => {
   return axios
     .delete(API_URL + "users/me", { headers: authHeader() })
     .then((response) => {
-      console.log(response)
-      //localStorage.removeItem("user");
+      try {
+        AsyncStorage.removeItem('user')
+        AsyncStorage.removeItem('films')
+      } catch (e) {
+        console.log(e)
+      }
       return response
     })
 }

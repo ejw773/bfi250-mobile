@@ -18,7 +18,6 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
         dispatch(register(name, email, password))
         .then(() => {
             toggleRegister()
-            console.log('logged in')
         })
     }
 
@@ -67,10 +66,8 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
                     title='Register'
                     color={masterColor}
                 />
-            </View>
-            <View style={styles.formButton}>
                 <Button 
-                    onPress={() => toggleLogin()}
+                    onPress={() => toggleRegister()}
                     title='Cancel'
                     color={masterColor}
                 />

@@ -1,27 +1,49 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT_ALL,
-    LOGOUT,
-    CHANGE_EMAIL,
-    CHANGE_NAME,
-    CHANGE_FILM_SET,
-    DELETE_ACCOUNT
-  } from "../actionTypes";
+  VERIFY_LOGIN,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_ALL,
+  LOGOUT,
+  CHANGE_EMAIL,
+  CHANGE_NAME,
+  CHANGE_FILM_SET,
+  DELETE_ACCOUNT
+} from "../actionTypes";
   
-  const user = {}
+  // let user = {}
   // const user = JSON.parse(localStorage.getItem("user"));
+
+  // const getStorage = async () => {
+  //   const userData = await AsyncStorage.getItem('user')
+  //   const user = JSON.parse(userData)
+  //   return user
+  // }
+
+  // user = getStorage()
+  // console.log(user)
+
+  // getStorage();
+  // const initialState = user.token
+  //   ? { isLoggedIn: true, user }
+  //   : { isLoggedIn: false, user: null };
   
-  const initialState = user
-    ? { isLoggedIn: true, user }
-    : { isLoggedIn: false, user: null };
+  const initialState = {
+    isLoggedIn: false,
+    user: null
+  }
   
   export default function auth(state = initialState, action) {
     const { type, payload } = action;
   
     switch (type) {
+      case VERIFY_LOGIN:
+        return {
+          ...state,
+          isLoggedIn: payload.isLoggedIn,
+          user: payload.user
+        }
       case REGISTER_SUCCESS:
         return {
           ...state,
