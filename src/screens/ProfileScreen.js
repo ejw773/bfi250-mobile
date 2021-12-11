@@ -6,21 +6,152 @@ import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../globalSettings/color'
 import { login } from '../redux/actions/auth';
 import AuthModal from '../components/auth/AuthModal'
-import LoginModal from '../components/auth/LoginModal'
-import RegisterModal from '../components/auth/RegisterModal'
+
+import DeleteAccountModal from '../components/Profile/DeleteAccountModal'
+import EmailChangeModal from '../components/Profile/EmailChangeModal'
+import LogOutModal from '../components/Profile/LogOutModal'
+import NameChangeModal from '../components/Profile/NameChangeModal'
+import PasswordChangeModal from '../components/Profile/PasswordChangeModal'
+
+import { logout, logoutAll, deleteAccount } from '../redux/actions/auth';
+import { changeFilmSet, changeName, changeEmail, changePassword } from '../redux/actions/user_prefs_actions'
+import { clearMessage } from '../redux/actions/message'
+import { changeShowSet } from '../redux/actions/local_actions'
 
 
 const Profile = () => {
-    const auth = useSelector((state) => state.auth)
-    console.log(auth)
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+    const user = useSelector((state) => state.auth)
+    const [nameText, setNameText] = useState('')
+    const [emailText, setEmailText] = useState('')
+    const [passwordText, setPasswordText] = useState('')
+    const [deleteMessage, setDeleteMessage] = useState('')
+
+    // Control Name Change
+    const [showNameChange, setShowNameChange] = useState(false)
+    const handleShowNameChange = () => setShowNameChange(true)
+    const handleCloseNameChange = () => setShowNameChange(false)
+
+    // Control Email Change
+    const [showEmailChange, setShowEmailChange] = useState(false)
+    const handleShowEmailChange = () => setShowEmailChange(true)
+    const handleCloseEmailChange = () => setShowEmailChange(false)
+    
+    // Control Password Change
+    const [showPasswordChange, setShowPasswordChange] = useState(false)
+    const handleShowPasswordChange = () => setShowPasswordChange(true)
+    const handleClosePasswordChange = () => setShowPasswordChange(false)
+
+    // Control Log Out
+    const [showLogOut, setShowLogOut] = useState(false)
+    const handleShowLogOut = () => setShowLogOut(true)
+    const handleCloseLogOut = () => setShowLogOut(false)
+    
+    // Control Delete Account
+    const [showDeleteAccount, setShowDeleteAccount] = useState(false)
+    const handleShowDeleteAccount = () => setShowDeleteAccount(true)
+    const handleCloseDeleteAccount = () => setShowDeleteAccount(false)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch])
+
+    const handleNameChange = async (e) => {
+        e.preventDefault()
+        dispatch(changeName(nameText))
+        handleCloseNameChange()
+    }
+
+    const handleEmailChange = async (e) => {
+        e.preventDefault()
+        dispatch(changeEmail(emailText))
+        handleCloseEmailChange()
+    }
+
+    const handlePasswordChange = async (e) => {
+        e.preventDefault()
+        dispatch(changePassword(passwordText))
+        handleClosePasswordChange()
+    }
+    
+    const handleLogOut = async (e) => {
+        e.preventDefault()
+        dispatch(logout())
+        handleCloseLogOut()
+    }
+
+    const handleLogOutAll = (e) => {
+        e.preventDefault()
+        dispatch(logoutAll())
+        handleCloseLogOut()
+    }
+
+    const handleDeleteAccount = (e) => {
+        e.preventDefault()
+        setDeleteMessage('Deleting account. You will be redirected...')
+        setTimeout(() => {
+            dispatch(deleteAccount())
+            handleCloseDeleteAccount()    
+        }, 2000)
+    }
+
+    const { name, email, filmSet } = user
+    const setSelection = (selection) => {
+        dispatch(changeFilmSet(selection))
+        dispatch(changeShowSet('view-all'))
+        return <Redirect to="/" />
+    }
+
+
+    
     return (
         <View style={styles.container}>
             <AuthModal 
                 isLoggedIn={isLoggedIn}
             />
             <Text>This is the Profile screen</Text>
+            <NameChangeModal 
+                showNameChange={showNameChange}
+                handleCloseNameChange={handleCloseNameChange}
+                handleNameChange={handleNameChange}
+                nameText={nameText}
+                setNameText={setNameText}
+            />
+
+            <EmailChangeModal 
+                showEmailChange={showEmailChange}
+                handleCloseEmailChange={handleCloseEmailChange}
+                handleEmailChange={handleEmailChange}
+                emailText={emailText}
+                setEmailText={setEmailText}
+            />
+
+            <PasswordChangeModal 
+                showPasswordChange={showPasswordChange}
+                handleClosePasswordChange={handleClosePasswordChange}
+                handlePasswordChange={handlePasswordChange}
+                passwordText={passwordText}
+                setPasswordText={setPasswordText}
+            />
+
+            <LogOutModal 
+                showLogOut={showLogOut}
+                handleCloseLogOut={handleCloseLogOut}
+                handleLogOut={handleLogOut}
+                handleLogOutAll={handleLogOutAll}
+            />
+
+            <DeleteAccountModal 
+                showDeleteAccount={showDeleteAccount}
+                handleCloseDeleteAccount={handleCloseDeleteAccount}
+                deleteMessage={deleteMessage}
+                handleDeleteAccount={handleDeleteAccount}
+            />
+
+
         </View>
     )
 }
