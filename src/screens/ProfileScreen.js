@@ -20,9 +20,9 @@ import { changeShowSet } from '../redux/actions/local_actions'
 
 
 const Profile = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-
     const user = useSelector((state) => state.auth)
+    const isLoggedIn = user.isLoggedIn
+
     const [nameText, setNameText] = useState('')
     const [emailText, setEmailText] = useState('')
     const [passwordText, setPasswordText] = useState('')

@@ -35,14 +35,13 @@ import {
   }
   
   export default function auth(state = initialState, action) {
-    const { type, payload } = action;
-  
+    const { type, payload } = action;  
     switch (type) {
       case VERIFY_LOGIN:
         return {
           ...state,
-          isLoggedIn: payload.isLoggedIn,
-          user: payload.user
+          isLoggedIn: true,
+          user: payload
         }
       case REGISTER_SUCCESS:
         return {
