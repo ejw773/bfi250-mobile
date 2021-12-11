@@ -13,6 +13,7 @@ const filmService = async () => {
                 return e;
             }
         }
+        storeData()
         return response.data
     } catch (e) {
         console.log(e)
