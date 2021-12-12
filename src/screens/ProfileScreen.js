@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Button, StyleSheet, Text, Modal } from 'react-native';
+import { View, StyleSheet, Text, Modal } from 'react-native';
+import { Button } from 'react-native-elements'
+import { verifyLogin } from '../redux/actions/auth'
 import { Input, CheckBox } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../globalSettings/color'
 import { login } from '../redux/actions/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthModal from '../components/auth/AuthModal'
+import { Picker } from '@react-native-picker/picker'
 
+import ProfileDisplay from '../components/Profile/ProfileDisplay'
 import DeleteAccountModal from '../components/Profile/DeleteAccountModal'
 import EmailChangeModal from '../components/Profile/EmailChangeModal'
 import LogOutModal from '../components/Profile/LogOutModal'
@@ -19,10 +24,11 @@ import { clearMessage } from '../redux/actions/message'
 import { changeShowSet } from '../redux/actions/local_actions'
 
 
-const Profile = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+const Profile = ({navigation}) => {
+    const [filmSet, setFilmSet] = useState('bfi1952')
     const user = useSelector((state) => state.auth)
+    const isLoggedIn = user.isLoggedIn
+
     const [nameText, setNameText] = useState('')
     const [emailText, setEmailText] = useState('')
     const [passwordText, setPasswordText] = useState('')
@@ -55,42 +61,43 @@ const Profile = () => {
 
     const dispatch = useDispatch()
 
+    const getUserData = async () => {
+        const userData = await AsyncStorage.getItem('user')
+        const user = JSON.parse(userData)
+        if (user) {
+            dispatch(verifyLogin(user))
+        }
+    }
+   
+    useEffect(() => {
+        getUserData()
+    }, [dispatch])    
+
     useEffect(() => {
         dispatch(clearMessage());
     }, [dispatch])
 
     const handleNameChange = async (e) => {
-        e.preventDefault()
         dispatch(changeName(nameText))
         handleCloseNameChange()
     }
 
     const handleEmailChange = async (e) => {
-        e.preventDefault()
         dispatch(changeEmail(emailText))
         handleCloseEmailChange()
     }
 
     const handlePasswordChange = async (e) => {
-        e.preventDefault()
         dispatch(changePassword(passwordText))
         handleClosePasswordChange()
     }
     
-    const handleLogOut = async (e) => {
-        e.preventDefault()
-        dispatch(logout())
-        handleCloseLogOut()
-    }
-
     const handleLogOutAll = (e) => {
-        e.preventDefault()
         dispatch(logoutAll())
         handleCloseLogOut()
     }
 
     const handleDeleteAccount = (e) => {
-        e.preventDefault()
         setDeleteMessage('Deleting account. You will be redirected...')
         setTimeout(() => {
             dispatch(deleteAccount())
@@ -98,21 +105,64 @@ const Profile = () => {
         }, 2000)
     }
 
-    const { name, email, filmSet } = user
+    if (!isLoggedIn || !user.user) {
+        return (
+            <AuthModal />
+    )
+    } else {
+
+    const { name, email, filmSet } = user.user
     const setSelection = (selection) => {
         dispatch(changeFilmSet(selection))
         dispatch(changeShowSet('view-all'))
-        return <Redirect to="/" />
+        navigation.navigate("Home")
     }
-
-
     
     return (
         <View style={styles.container}>
-            <AuthModal 
-                isLoggedIn={isLoggedIn}
-            />
-            <Text>This is the Profile screen</Text>
+            <View>
+                <Text>{name}'s Profile</Text>
+                <Text>The BFI publishes a new list every decade. Choose your list below.</Text>
+                <Text>{filmSet}</Text>
+                <Picker
+                    selectedValue={filmSet}
+                    onValueChange={(itemValue => setSelection(itemValue))}
+                >
+                    <Picker.Item label="bfi1952" value="bfi1952" />
+                    <Picker.Item label="bfi1962" value="bfi1962" />
+                    <Picker.Item label="bfi1972" value="bfi1972" />
+                    <Picker.Item label="bfi1982" value="bfi1982" />
+                    <Picker.Item label="bfi1992" value="bfi1992" />
+                    <Picker.Item label="bfi2002" value="bfi2002" />
+                    <Picker.Item label="bfi2012" value="bfi2012" />
+                    
+                    
+                </Picker>
+                <Text>List Chooser Goes Here</Text>
+                <Text>User Name: {name}</Text>
+                <Button
+                    title="Change User Name"
+                    onPress={handleShowNameChange}
+                />
+                <Text>{email}</Text>
+                <Button
+                    title="Change Email"
+                    onPress={handleShowEmailChange}
+                />
+                <Text>Password</Text>
+                <Button
+                    title="Change Password"
+                    onPress={handleShowPasswordChange}
+                />
+                <Button
+                    title="Log Out"
+                    onPress={handleShowLogOut}
+                />
+                <Button
+                    title="Delete Account"
+                    onPress={handleShowDeleteAccount}
+                />
+            </View>
             <NameChangeModal 
                 showNameChange={showNameChange}
                 handleCloseNameChange={handleCloseNameChange}
@@ -140,7 +190,6 @@ const Profile = () => {
             <LogOutModal 
                 showLogOut={showLogOut}
                 handleCloseLogOut={handleCloseLogOut}
-                handleLogOut={handleLogOut}
                 handleLogOutAll={handleLogOutAll}
             />
 
@@ -150,10 +199,9 @@ const Profile = () => {
                 deleteMessage={deleteMessage}
                 handleDeleteAccount={handleDeleteAccount}
             />
-
-
         </View>
     )
+}
 }
 
 const styles = StyleSheet.create({

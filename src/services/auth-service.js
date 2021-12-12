@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_URL } from '../api/apiUrl';
 import authHeader from './auth-header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import seenStatusService from './seen-status-service'
 import localStorageHelper from './localStorage-helper'
 
 const register = (name, email, password) => {
@@ -33,44 +34,48 @@ const login = (email, password) => {
           'user',
           JSON.stringify(response.data)
         )
+        seenStatusService.getSeenStatus()
       }
       return response.data;
     });
 };
 
-export const logout = () => {
-  return axios
-    .post(API_URL + "users/logout", null, { headers: authHeader() })
-    .then((response) => {
-      try {
-        AsyncStorage.removeItem('user')
-        AsyncStorage.removeItem('films')
-      } catch (e) {
-        console.log(e)
-      }
-    })
+export const logout = async () => {
+  try {
+    const headerString = await authHeader();
+    const response = await axios.post(API_URL + "users/logout", null, { headers: headerString })
+    console.log(response)
+    AsyncStorage.removeItem('user')
+    AsyncStorage.removeItem('films')
+    return response
+  } catch (e) {
+    console.log(e)
+  }
 };
 
-const logoutAll = () => {
-  return axios
-    .post(API_URL + "users/logoutAll", null, { headers: authHeader() })
-    .then((response) => {
-      try {
-        AsyncStorage.removeItem('user')
-        AsyncStorage.removeItem('films')
-      } catch (e) {
-        console.log(e)
-      }
-    })
+const logoutAll = async () => {
+  try {
+    const headerString = await authHeader();
+    const response = await axios.post(API_URL + "users/logoutAll", null, { headers: headerString })
+    const result = await AsyncStorage.removeItem('user')
+    console.log(response)
+    return result
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-const changeFilmSet = (bfiSet) => {
-  return axios
-    .patch(API_URL + "users/me", {filmSet: bfiSet}, { headers: authHeader() })
-    .then((response) => {
-      //localStorageHelper('filmSet', bfiSet)
-      return response.data
-    })
+const changeFilmSet = async (bfiSet) => {
+  const headerString = await authHeader()
+  try {
+    const response = await axios.patch(API_URL + "users/me", {filmSet: bfiSet}, { headers: headerString })
+    console.log(response.data)
+    localStorageHelper('filmSet', bfiSet)
+    // update local storage
+    return response.data
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const changeName = (newName) => {

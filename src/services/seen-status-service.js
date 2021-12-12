@@ -2,7 +2,6 @@ import axios from 'axios'
 import { API_URL } from '../api/apiUrl'
 import authHeader from './auth-header'
 
-
 const getSeenStatus = async () => {
     const theString = await authHeader();
     try {
@@ -10,6 +9,7 @@ const getSeenStatus = async () => {
         return response.data  
     } catch (e) {
         console.log(e)
+        // AuthService.logout()
     }
 }
 
@@ -20,6 +20,7 @@ const deleteSeenStatus = async (imdbID) => {
         return response
     } catch (e) {
         console.log(e)
+        // AuthService.logout()
     }
 }
 
@@ -35,6 +36,7 @@ const updateSeenStatus = async (film, seenStatus) => {
         return response
     } catch (e) {
         console.log(e)
+        // AuthService.logout()
     }
 }
 

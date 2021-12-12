@@ -1,13 +1,21 @@
 import axios from 'axios'
-import authHeader from './auth-header'
 import { API_URL } from '../api/apiUrl'
+import authHeader from './auth-header'
 
-const getMyProfile = () => {
-    return axios.get(API_URL + 'users/me', { headers: authHeader() });
+const getMyProfile = async () => {
+    const theString = await authHeader();
+    try {
+        const response = await axios.get(API_URL + 'users/me', { headers: theString });
+        console.log(response)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-const getMySeenStatus = () => {
-    return axios.get(API_URL + 'seenstatus', { headers: authHeader() });
+const getMySeenStatus = async () => {
+    const theString = await authHeader();
+    return axios.get(API_URL + 'seenstatus', { headers: theString });
 }
 
 const userServices = {

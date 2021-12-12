@@ -13,26 +13,24 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
   
-  // const getUserData = async () => {
-  //   const userData = await AsyncStorage.getItem('user')
-  //   const user = JSON.parse(userData)
-  //   if (user.token) {
-  //     setIsLoggedIn(true)
-  //     dispatch(verifyLogin(isLoggedIn, user))
-  //   }
-  // }
+  const getUserData = async () => {
+    const userData = await AsyncStorage.getItem('user')
+    const user = JSON.parse(userData)
+    if (user) {
+      dispatch(verifyLogin(user))
+    }
+  }
 
-  // useEffect(() => {
-  //   getUserData()
-  // }, [dispatch])
+  useEffect(() => {
+    getUserData()
+  }, [dispatch])
 
   return (
-    
       <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator initialRouteName="Profile">
         <Tab.Screen name="Home" component={Home} options={{ title: 'BFI 250 Progress Bar'}}/>
         <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="About" component={About} />

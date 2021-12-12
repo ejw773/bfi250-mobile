@@ -25,6 +25,7 @@ export const getSeenStatus = () => (dispatch) => {
             dispatch({
                 type: GET_SEEN_STATUS_FAIL,
             });
+            SeenStatusService.getSeenStatus()
             return Promise.reject();
         }
     )
@@ -46,6 +47,7 @@ export const deleteSeenStatus = (film, seenStatus) => (dispatch) => {
             dispatch({
                 type: DELETE_SEEN_STATUS_FAIL,
             });
+            SeenStatusService.getSeenStatus()
             return Promise.reject();
         }
     )
@@ -67,6 +69,7 @@ export const toggleSeenStatus = (film, seenStatus) => (dispatch) => {
             dispatch({
                 type: DELETE_SEEN_STATUS_FAIL,
             });
+            SeenStatusService.getSeenStatus()
             return Promise.reject();
         }
     )

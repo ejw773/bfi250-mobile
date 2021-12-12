@@ -12,9 +12,7 @@ import {
 
 import AuthService from "../../services/auth-service";
 
-export const verifyLogin = (isLoggedIn, user) => (dispatch) => {
-  console.log(isLoggedIn)
-  console.log(user)
+export const verifyLogin = (user) => (dispatch) => {
   dispatch({
     type: VERIFY_LOGIN,
     payload: user
