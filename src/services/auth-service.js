@@ -78,44 +78,48 @@ const changeFilmSet = async (bfiSet) => {
   }
 }
 
-const changeName = (newName) => {
-  return axios
-    .patch(API_URL + "users/me", {name: newName}, { headers: authHeader() })
-    .then((response) => {
-      //localStorageHelper('name', newName)
-      return response
-    })
+const changeName = async (newName) => {
+  const headerString = await authHeader()
+  try {
+    const response = await axios.patch(API_URL + "users/me", {name: newName}, { headers: headerString })
+    // local storage helper
+    return response
+  } catch (e) {
+    return e
+  }
 }
 
-const changeEmail = (newEmail) => {
-  return axios
-    .patch(API_URL + "users/me", {email: newEmail}, { headers: authHeader() })
-    .then((response) => {
-      //localStorageHelper('email', newEmail)
-      return response
-    })
+const changeEmail = async (newEmail) => {
+  const headerString = await authHeader()
+  try {
+    const response = await axios.patch(API_URL + "users/me", {email: newEmail}, { headers: headerString })
+    //local storage helper
+    return response
+  } catch (e) {
+    return e
+  }
 }
 
-const changePassword = (newPassword) => {
-  return axios
-    .patch(API_URL + "users/me", {password: newPassword}, { headers: authHeader() })
-    .then((response) => {
-      return response
-    })
+const changePassword = async (newPassword) => {
+  const headerString = await authHeader()
+  try {
+    const response = await axios.patch(API_URL + "users/me", {password: newPassword}, { headers: headerString })
+    return response
+  } catch (e) {
+    return e
+  }
 }
 
-const deleteAccount = () => {
-  return axios
-    .delete(API_URL + "users/me", { headers: authHeader() })
-    .then((response) => {
-      try {
-        AsyncStorage.removeItem('user')
-        AsyncStorage.removeItem('films')
-      } catch (e) {
-        console.log(e)
-      }
-      return response
-    })
+const deleteAccount = async () => {
+  const headerString = await authHeader()
+  try {
+    const response = await axios.delete(API_URL + "users/me", { headers: headerString })
+    AsyncStorage.removeItem('user')
+    AsyncStorage.removeItem('films')
+    return response
+  } catch (e) {
+    return e
+  }
 }
 
 
