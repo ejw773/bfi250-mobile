@@ -13,6 +13,7 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+  const user = useSelector((state) => state.auth)
   const dispatch = useDispatch();
   
   const getUserData = async () => {

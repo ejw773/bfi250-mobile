@@ -31,7 +31,11 @@ import {
   
   const initialState = {
     isLoggedIn: false,
-    user: null
+    user: {
+      name: null,
+      email: null,
+      filmSet: 'bfi2012'
+    }
   }
   
   export default function auth(state = initialState, action) {

@@ -13,7 +13,6 @@ import {
 import AuthService from "../../services/auth-service";
 
 export const verifyLogin = (user) => (dispatch) => {
-  console.log(user)
   dispatch({
     type: VERIFY_LOGIN,
     payload: user

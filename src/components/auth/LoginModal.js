@@ -14,10 +14,8 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
     const dispatch = useDispatch();
 
     const handleLogin = () => {
-        dispatch(login(email, password))
-        .then(() => {
-            toggleLogin()
-        })
+        toggleLogin()
+        dispatch(login(email, password))       
     }
 
 
@@ -31,6 +29,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
             <Input 
                 placeholder='Email'
                 leftIcon={{type: 'font-awesome', email: 'user-o'}}
+                autoCapitalize='none'
                 onChangeText={email => setEmail(email)}
                 value={email}
                 containerStyle={styles.formInput}
@@ -39,6 +38,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
             <Input 
                 placeholder='Password'
                 leftIcon={{type: 'font-awesome', name: 'key'}}
+                autoCapitalize='none'
                 onChangeText={password => setPassword(password)}
                 value={password}
                 containerStyle={styles.formInput}

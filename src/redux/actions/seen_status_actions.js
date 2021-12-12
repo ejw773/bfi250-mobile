@@ -31,6 +31,7 @@ export const getSeenStatus = () => (dispatch) => {
 }
 
 export const deleteSeenStatus = (film, seenStatus) => (dispatch) => {
+    console.log('changing seen status')
     return SeenStatusService.deleteSeenStatus(film).then(
         (response) => {
             dispatch({

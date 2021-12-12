@@ -32,6 +32,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
             <Input 
                 placeholder='Enter User Name'
                 leftIcon={{type: 'font-awesome', email: 'user-o'}}
+                autoCapitalize='none'
                 onChangeText={name => setName(name)}
                 value={name}
                 containerStyle={styles.formInput}
@@ -40,6 +41,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
             <Input 
                 placeholder='Enter Email'
                 leftIcon={{type: 'font-awesome', email: 'user-o'}}
+                autoCapitalize='none'
                 onChangeText={email => setEmail(email)}
                 value={email}
                 containerStyle={styles.formInput}
@@ -48,6 +50,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
             <Input 
                 placeholder='Enter Password'
                 leftIcon={{type: 'font-awesome', name: 'key'}}
+                autoCapitalize='none'
                 onChangeText={password => setPassword(password)}
                 value={password}
                 containerStyle={styles.formInput}

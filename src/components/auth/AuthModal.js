@@ -8,8 +8,9 @@ import { login } from '../../redux/actions/auth';
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 
-const AuthModal = ({ isLoggedIn }) => {
+const AuthModal = () => {
     const auth = useSelector((state) => state.auth)
+    console.log('here is the auth modal!')
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
 
@@ -30,9 +31,6 @@ const AuthModal = ({ isLoggedIn }) => {
 
 
     return (
-        <Modal
-            visible={!isLoggedIn}
-        >
         <View style={styles.container}>
             <Text>Log In Or Register</Text>
             <View style={styles.formButton}>
@@ -58,7 +56,6 @@ const AuthModal = ({ isLoggedIn }) => {
                 toggleRegister={toggleRegister}
             />
         </View>
-        </Modal>
     )
 }
 

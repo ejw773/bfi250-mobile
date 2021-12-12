@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, Text } from 'react-native';
 import getFilms from '../redux/actions/films';
@@ -11,11 +11,12 @@ import Loading from '../components/LoadingComponent';
 
 const Home = () => {
   const user = useSelector((state) => state.auth)
-  if (!user.token) {
-    
+  let filmSet = 'bfi2012'
+  try {
+    filmSet = user.user.filmSet
+  } catch {
+    console.log('failed to set filmSet')
   }
-  // const filmSet = user?.user?.filmSet
-  const filmSet = 'bfi1952'
   const showSet = useSelector((state => state.showSet))
   const searchTitle = useSelector((state) => state.searchTitle.title)
 
@@ -42,7 +43,7 @@ const Home = () => {
   }
 
 
-  if (films.length === 0) {
+  if (films?.length === 'undefined' || films?.length === 0) {
       return (
           <Loading />
       )
