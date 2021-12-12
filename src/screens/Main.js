@@ -30,7 +30,7 @@ const Main = () => {
 
   return (
       <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator initialRouteName="Profile">
         <Tab.Screen name="Home" component={Home} options={{ title: 'BFI 250 Progress Bar'}}/>
         <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="About" component={About} />

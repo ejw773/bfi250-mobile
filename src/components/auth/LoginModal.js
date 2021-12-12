@@ -15,7 +15,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
 
     const handleLogin = () => {
         toggleLogin()
-        dispatch(login(email, password))       
+        dispatch(login(email, password))
     }
 
 

@@ -10,7 +10,6 @@ import RegisterModal from './RegisterModal'
 
 const AuthModal = () => {
     const auth = useSelector((state) => state.auth)
-    console.log('here is the auth modal!')
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
 

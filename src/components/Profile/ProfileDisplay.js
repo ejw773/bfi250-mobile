@@ -2,9 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 
 const ProfileDisplay = (props) => {
-    console.log(props)
     const { name, filmSet, setSelection, handleShowNameChange, handleShowEmailChange, email, handleShowPasswordChange, handleShowLogOut, handleShowDeleteAccount } = props
-    console.log(name)
     return (
         <View>
             <Text>{name}'s Profile</Text>

@@ -6,7 +6,7 @@ import ProgressContainer from './ProgressContainer'
 
 const ProgressBar = ({ totalFilms, totalSeen, totalSkipped, totalUnseen, filmSet }) => {
     const dispatch = useDispatch();
-    const barTitle = `${filmSet.slice(-4)} - ${totalFilms} Titles`
+    const barTitle = `${filmSet?.slice(-4)} - ${totalFilms} Titles`
   return (
     <View>
       <TouchableOpacity 
