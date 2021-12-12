@@ -7,7 +7,8 @@ const LogOutModal = (props) => {
         <View style={styles.centeredView}>
         <Modal
           transparent={true}
-          visible={showLogOut}
+          visible={false}
+          // visible={showLogOut}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
