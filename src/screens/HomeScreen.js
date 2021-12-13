@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import getFilms from '../redux/actions/films';
 import { getSeenStatus } from '../redux/actions/seen_status_actions';
 import ProgressBar from '../components/ProgressBar/ProgressBar';

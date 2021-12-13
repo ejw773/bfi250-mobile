@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, Linking, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Card } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -64,10 +65,31 @@ const About = () => {
             <Card>
                 <Card.Title>Code <Ionicons name='logo-github' /> </Card.Title>
                 <Card.Divider />
-                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}>Frontend on GitHub</Text>
-                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}>Backend on GitHub</Text>
-                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-mobile')}>Mobile on GitHub</Text>
-                <Text style={styles.linkText} onPress={() => Linking.openURL('https://snack.expo.dev/@ejw773/github.com-ejw773-bfi250-mobile')}>Mobile on Snack</Text>
+                <Button
+                    title="Frontend on GitHub"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}
+                />
+                <Button
+                    title="Backend on GitHub"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}
+                />
+                <Button
+                    title="Mobile on GitHub"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-mobile')}
+                />
+                <Button
+                    title="Mobile on Expo Snack"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://snack.expo.dev/@ejw773/github.com-ejw773-bfi250-mobile')}
+                />
+                <Button
+                    title="BFI250.com"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://bfi250.com/')}
+                />
             </Card>
             <Card>
                 <Card.Title>Me</Card.Title>
@@ -76,8 +98,11 @@ const About = () => {
                     I am a full-stack developer based out of Greenville, South Carolina, with a passion for cinema and for learning new things.
                 </Text>
                 <Card.Divider />
-                <Text style={styles.linkText} onPress={() => Linking.openURL('https://www.elijahwilcott.com/')}>elijahwilcott.com</Text>
-
+                <Button
+                    title="elijahwilcott.com"
+                    style={styles.linkButton} 
+                    onPress={() => Linking.openURL('https://www.elijahwilcott.com/')}
+                />
             </Card>
         </ScrollView>
     )
@@ -89,6 +114,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     marginBottom: {
+        marginBottom: 10
+    },
+    linkButton: {
         marginBottom: 10
     }
 })

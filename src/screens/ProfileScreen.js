@@ -110,7 +110,7 @@ const Profile = ({navigation}) => {
                 },
                 {
                     text: "Log Out",
-                    onPress: () => handleLogOutAll()
+                    onPress: () => handleLogout()
                 }
             ]
         )
