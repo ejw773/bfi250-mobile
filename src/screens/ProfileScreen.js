@@ -153,6 +153,7 @@ const Profile = ({navigation}) => {
                         <Picker.Item label="2022 (0 Films)" value="bfi2022" />
                     </Picker>
                     <Button
+                        buttonStyle={{backgroundColor: 'green'}}
                         style={styles.formButton}
                         title="Go To Films"
                         onPress={() => navigation.navigate('Home')}
@@ -187,11 +188,13 @@ const Profile = ({navigation}) => {
                         title="Log Out"
                         //onPress={handleShowLogOut}
                         onPress={logOutAlert}
+                        buttonStyle={{backgroundColor: 'gray'}}
                     />
                     <Button
                         style={styles.formButton}
                         title="Delete Account"
                         onPress={deleteAccountAlert}
+                        buttonStyle={{backgroundColor: 'red'}}
                     />
                 </Card>
             </View>

@@ -1,41 +1,43 @@
 import React from 'react';
-import { View, Text, Modal, StyleSheet, Input } from 'react-native'
-import { Card } from 'react-native-elements'
+import { TextInput, View, Text, Modal, StyleSheet, Input } from 'react-native'
+import { Card, Button } from 'react-native-elements'
 
 const NameChangeModal = (props) => {
     const { showNameChange, handleCloseNameChange, handleNameChange, nameText, setNameText } = props
     return (
-        <Modal
-            transparent={true}
-            visible={showNameChange}
-            onRequestClose={handleCloseNameChange}
-        >
-            <Card>
-                <Card.Title>Hello</Card.Title>
-            </Card>
-
+        <Modal animationType="slide" 
+            transparent={false} visible={showNameChange} 
+            presentationStyle="overFullScreen" 
+            onDismiss={handleCloseNameChange}>
+            <View style={styles.card}>
+                <Card>
+                    <Card.Title>Change Name:</Card.Title>
+                    <Card.Divider />
+                    <TextInput 
+                        style={styles.textInput}
+                        placeholder='New Name' 
+                        value={nameText} 
+                        onChangeText={(value) => setNameText(value)} />
+                    <Card.Divider/>
+                    <Button style={styles.formButton} title="Change Name" onPress={handleNameChange} />
+                    <Button style={styles.formButton} buttonStyle={{backgroundColor: 'gray'}} title="Cancel" onPress={handleCloseNameChange} />
+                </Card>
+            </View>
         </Modal>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
+    formButton: {
         margin: 20
     },
-    formIcon: {
-        marginRight: 10
+    card: {
+        marginTop: 200
     },
-    formInput: {
+    textInput: {
+        borderWidth: 1,
         padding: 10
     },
-    formCheckbox: {
-        margin: 10,
-        backgroundColor: null
-    },
-    formButton: {
-        margin: 40
-    }
 })
 
 

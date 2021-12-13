@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet, Text, Modal } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
-// import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../../globalSettings/color'
 import { login } from '../../redux/actions/auth';
 
@@ -10,7 +9,6 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const message = useSelector((state) => state.message.message)
-    // const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -40,6 +38,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
                     value={email}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
+                    textContentType='emailAddress'
                 />
                 <Input 
                     placeholder='Password'
@@ -49,14 +48,8 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
                     value={password}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
+                    textContentType='password'
                 />
-                {/* <CheckBox 
-                    title='Remember Me'
-                    center
-                    checked={remember}
-                    onPress={() => setRemember(!remember)}
-                    containerStyle={styles.formCheckbox}
-                /> */}
                 <View style={styles.formButton}>
                     <Button 
                         style={styles.formButton}
@@ -77,7 +70,6 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
             </View>
         </Modal>
     </View>
-    
     )
 }
 
