@@ -1,37 +1,47 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import Buttons from './ButtonsComponent'
-import BadgeComponent from './BadgeComponent'
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
+import Buttons from './ButtonsComponent';
+import BadgeComponent from './BadgeComponent';
 
-const MovieCard = ({item, status}) => {
+const MovieCard = ({ item, status }) => {
   return (
-    <View style={{
-      flexDirection: 'row',
-      borderBottomWidth: 1,
-      borderBottomColor: 'black'
-      }}>
+    <View
+      style={{
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: 'black',
+      }}
+    >
       <View>
         <TouchableOpacity
-          onPress={() => Linking.openURL(`https://www.imdb.com/title/${item.imdbID}/`)}
+          onPress={() =>
+            Linking.openURL(`https://www.imdb.com/title/${item.imdbID}/`)
+          }
         >
-          <Image 
-            style={styles.imageStyle}
-            source={{uri: item.poster}} 
-          />
+          <Image style={styles.imageStyle} source={{ uri: item.poster }} />
         </TouchableOpacity>
       </View>
-      <View style={{paddingTop: 30}}>
-          <BadgeComponent style={styles.badgeStyle} status={status} />
-          <Text style={{fontSize: 20}}>{item.bfiRank}. {item.title}</Text>
-          <Text>{item.director}</Text>
-          <Text>{item.year}</Text>
-          <View style={{alignContent: 'center'}}>
-            <Buttons status={status} imdbID={item.imdbID} key={item.imdbID} />
-          </View>
+      <View style={{ paddingTop: 30 }}>
+        <BadgeComponent style={styles.badgeStyle} status={status} />
+        <Text style={{ fontSize: 20 }}>
+          {item.bfiRank}. {item.title}
+        </Text>
+        <Text>{item.director}</Text>
+        <Text>{item.year}</Text>
+        <View style={{ alignContent: 'center' }}>
+          <Buttons status={status} imdbID={item.imdbID} key={item.imdbID} />
+        </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   imageStyle: {
@@ -39,8 +49,8 @@ const styles = StyleSheet.create({
     height: 250,
   },
   badgeStyle: {
-    position: 'absolute'
-  }
-})
+    position: 'absolute',
+  },
+});
 
 export default MovieCard;

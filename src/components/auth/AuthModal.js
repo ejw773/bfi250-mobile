@@ -1,82 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { View, StyleSheet, Text, Modal } from 'react-native';
-import { Input, Button, CheckBox } from 'react-native-elements';
-import * as SecureStore from 'expo-secure-store';
-import { masterColor } from '../../globalSettings/color'
-import { login } from '../../redux/actions/auth';
-import { clearMessage } from '../../redux/actions/message'
-import LoginModal from './LoginModal'
-import RegisterModal from './RegisterModal'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { View, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-elements';
+import { clearMessage } from '../../redux/actions/message';
+import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
+import { masterColor } from '../../globalSettings/color';
 
 const AuthModal = () => {
-    const auth = useSelector((state) => state.auth)
-    const [showLogin, setShowLogin] = useState(false)
-    const [showRegister, setShowRegister] = useState(false)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [remember, setRemember] = useState(false);
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const toggleLogin = () => {
+    setShowLogin(!showLogin);
+    dispatch(clearMessage());
+  };
+  const toggleRegister = () => {
+    setShowRegister(!showRegister);
+    dispatch(clearMessage());
+  };
 
-
-    const toggleLogin = () => {
-        setShowLogin(!showLogin)
-        dispatch(clearMessage())
-    }
-    const toggleRegister = () => {
-        setShowRegister(!showRegister)
-        dispatch(clearMessage())
-    }
-
-
-    return (
-        <View style={styles.container}>
-            <Text>Log In Or Register</Text>
-            <View style={styles.formButton}>
-                <Button
-                    onPress={() => toggleLogin()}
-                    title="Log In"
-                />
-            </View>
-            <View style={styles.formButton}>
-                <Button
-                    onPress={() => toggleRegister()}
-                    title="Register"
-                />
-            </View>
-            <LoginModal 
-                showLogin={showLogin}
-                toggleLogin={toggleLogin}
-            />
-            <RegisterModal
-                showRegister={showRegister}
-                toggleRegister={toggleRegister}
-            />
-        </View>
-    )
-}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.loginText}>Log In Or Register</Text>
+      <View style={styles.formButtonGroup}>
+        <Button
+          style={styles.formButton}
+          onPress={() => toggleLogin()}
+          title='Log In'
+        />
+        <Button
+          style={styles.formButton}
+          onPress={() => toggleRegister()}
+          title='Register'
+        />
+      </View>
+      <LoginModal showLogin={showLogin} toggleLogin={toggleLogin} />
+      <RegisterModal
+        showRegister={showRegister}
+        toggleRegister={toggleRegister}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        margin: 20
-    },
-    formIcon: {
-        marginRight: 10
-    },
-    formInput: {
-        padding: 10
-    },
-    formCheckbox: {
-        margin: 10,
-        backgroundColor: null
-    },
-    formButton: {
-        margin: 40
-    }
-})
+  container: {
+    justifyContent: 'center',
+    margin: 20,
+    flex: 1,
+  },
+  formIcon: {
+    marginRight: 10,
+  },
+  formInput: {
+    padding: 10,
+  },
+  formCheckbox: {
+    margin: 10,
+    backgroundColor: null,
+  },
+  formButtonGroup: {
+    margin: 40,
+  },
+  formButton: {
+    margin: 10,
+  },
+  loginText: {
+    color: masterColor,
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
 
-export default AuthModal
+export default AuthModal;

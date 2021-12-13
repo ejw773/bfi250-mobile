@@ -8,9 +8,9 @@ import { Provider } from 'react-redux';
 export default function App() {
   return (
     <Provider store={store}>
-        <SafeAreaProvider>
-          <Main />
-        </SafeAreaProvider>
+      <SafeAreaProvider>
+        <Main />
+      </SafeAreaProvider>
     </Provider>
   );
 }

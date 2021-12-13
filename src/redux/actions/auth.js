@@ -7,28 +7,28 @@ import {
   LOGOUT,
   SET_MESSAGE,
   LOGOUT_ALL,
-  DELETE_ACCOUNT    
-} from "../actionTypes";
+  DELETE_ACCOUNT,
+} from '../actionTypes';
 
-import AuthService from "../../services/auth-service";
+import AuthService from '../../services/auth-service';
 
 export const verifyLogin = (user) => (dispatch) => {
   dispatch({
     type: VERIFY_LOGIN,
-    payload: user
-  })
-}
+    payload: user,
+  });
+};
 
 export const register = (username, email, password) => (dispatch) => {
   return AuthService.register(username, email, password).then(
     (response) => {
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: { user: response}
+        payload: { user: response },
       });
       dispatch({
         type: SET_MESSAGE,
-        payload: "Account Created",
+        payload: 'Account Created',
       });
 
       return Promise.resolve();
@@ -60,11 +60,11 @@ export const login = (email, password) => (dispatch) => {
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: { 
+        payload: {
           name: data.name,
           email: data.email,
           filmSet: data.filmSet,
-          token: data.token
+          token: data.token,
         },
       });
       return Promise.resolve();
@@ -89,32 +89,28 @@ export const login = (email, password) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  return AuthService.logout().then(
-    (data) => {
-      dispatch({
-        type: LOGOUT,
-        payload: data
-      });
-      return Promise.resolve();
-    }
-  )
+  return AuthService.logout().then((data) => {
+    dispatch({
+      type: LOGOUT,
+      payload: data,
+    });
+    return Promise.resolve();
+  });
 };
 
 export const logoutAll = () => (dispatch) => {
   AuthService.logoutAll();
   dispatch({
     type: LOGOUT_ALL,
-  })
-}
+  });
+};
 
 export const deleteAccount = () => (dispatch) => {
-  return AuthService.deleteAccount().then(
-    (data) => {
-      dispatch({
-        type: DELETE_ACCOUNT,
-        payload: data
-      });
-      return Promise.resolve();
-    }
-  )
-}
+  return AuthService.deleteAccount().then((data) => {
+    dispatch({
+      type: DELETE_ACCOUNT,
+      payload: data,
+    });
+    return Promise.resolve();
+  });
+};
