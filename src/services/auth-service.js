@@ -56,8 +56,9 @@ const logoutAll = async () => {
   try {
     const tokenString = await authHeader();
     const response = await axios.post(API_URL + "users/logoutAll", null, { headers: tokenString })
-    const result = await AsyncStorage.removeItem('user')
-    return result
+    await AsyncStorage.removeItem('user')
+    await AsyncStorage.removeItem('films')
+    return response
   } catch (e) {
     console.log(e)
   }

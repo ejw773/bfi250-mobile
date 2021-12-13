@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, Linking, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const About = () => {
     const socialMedia = [
@@ -61,7 +62,7 @@ const About = () => {
                 <Text>The frontend is hosted on SiteGround, the backend is hosted on Heroku, and the app is availabe on Expo Snack.</Text>
             </Card>
             <Card>
-                <Card.Title>Code</Card.Title>
+                <Card.Title>Code <Ionicons name='logo-github' /> </Card.Title>
                 <Card.Divider />
                 <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}>Frontend on GitHub</Text>
                 <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}>Backend on GitHub</Text>

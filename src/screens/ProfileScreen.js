@@ -12,7 +12,7 @@ import EmailChangeModal from '../components/Profile/EmailChangeModal'
 import NameChangeModal from '../components/Profile/NameChangeModal'
 import PasswordChangeModal from '../components/Profile/PasswordChangeModal'
 
-import { logoutAll, deleteAccount } from '../redux/actions/auth';
+import { logout, deleteAccount } from '../redux/actions/auth';
 import { changeFilmSet, changeName, changeEmail, changePassword } from '../redux/actions/user_prefs_actions'
 import { clearMessage } from '../redux/actions/message'
 import { changeShowSet } from '../redux/actions/local_actions'
@@ -75,8 +75,8 @@ const Profile = ({navigation}) => {
         handleClosePasswordChange()
     }
     
-    const handleLogOutAll = () => {
-        dispatch(logoutAll())
+    const handleLogout = () => {
+        dispatch(logout())
 //        handleCloseLogOut()
     }
 
