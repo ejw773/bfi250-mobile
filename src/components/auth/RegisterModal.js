@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, Text, Modal } from 'react-native';
 import { Input, Button, CheckBox } from 'react-native-elements';
 // import * as SecureStore from 'expo-secure-store';
@@ -10,6 +10,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const message = useSelector((state) => state.message.message)
     // const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
@@ -77,6 +78,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
                     color={masterColor}
                 />
             </View>
+            <View><Text style={{color: 'red'}}>{message}</Text></View>
         </View>
     </Modal>
     </View>

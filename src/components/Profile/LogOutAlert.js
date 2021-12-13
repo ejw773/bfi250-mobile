@@ -1,7 +1,6 @@
 import { Alert } from 'react-native';
 
 const logOutAlert = (props) => {
-    console.log('log out alert')
     const { handleLogOutAll } = props
     Alert.alert(
         'Hey There',

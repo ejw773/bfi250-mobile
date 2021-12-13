@@ -44,7 +44,6 @@ export const logout = async () => {
   try {
     const headerString = await authHeader();
     const response = await axios.post(API_URL + "users/logout", null, { headers: headerString })
-    console.log(response)
     AsyncStorage.removeItem('user')
     AsyncStorage.removeItem('films')
     return response
@@ -58,7 +57,6 @@ const logoutAll = async () => {
     const headerString = await authHeader();
     const response = await axios.post(API_URL + "users/logoutAll", null, { headers: headerString })
     const result = await AsyncStorage.removeItem('user')
-    console.log(response)
     return result
   } catch (e) {
     console.log(e)
@@ -69,7 +67,6 @@ const changeFilmSet = async (bfiSet) => {
   const headerString = await authHeader()
   try {
     const response = await axios.patch(API_URL + "users/me", {filmSet: bfiSet}, { headers: headerString })
-    console.log(response.data)
     localStorageHelper('filmSet', bfiSet)
     // update local storage
     return response.data

@@ -5,6 +5,7 @@ import { Input, Button, CheckBox } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../../globalSettings/color'
 import { login } from '../../redux/actions/auth';
+import { clearMessage } from '../../redux/actions/message'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 
@@ -23,9 +24,11 @@ const AuthModal = () => {
 
     const toggleLogin = () => {
         setShowLogin(!showLogin)
+        dispatch(clearMessage())
     }
     const toggleRegister = () => {
         setShowRegister(!showRegister)
+        dispatch(clearMessage())
     }
 
 

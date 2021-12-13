@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet, Text, Modal } from 'react-native';
 import { Input, CheckBox, Button } from 'react-native-elements';
 // import * as SecureStore from 'expo-secure-store';
@@ -9,13 +9,19 @@ import { login } from '../../redux/actions/auth';
 const LoginModal = ({ showLogin, toggleLogin }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const message = useSelector((state) => state.message.message)
     // const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
 
-    const handleLogin = () => {
-        toggleLogin()
-        dispatch(login(email, password))
+    const handleLogin = async () => {
+        try {
+            const response = await dispatch(login(email, password))
+            console.log(response)
+            toggleLogin()
+        } catch (error) {
+            console.log(error)    
+        }
     }
 
 
@@ -64,6 +70,9 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
                         title='Cancel'
                         color={masterColor}
                     />
+                </View>
+                <View>
+                    <Text style={{color: 'red'}}>{message}</Text>
                 </View>
             </View>
         </Modal>
