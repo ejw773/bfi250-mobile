@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Text, Modal, StyleSheet, Input } from 'react-native'
+import { TextInput, View, Modal, StyleSheet } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 
 const NameChangeModal = (props) => {
