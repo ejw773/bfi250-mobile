@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import getFilms from '../redux/actions/films';
 import { getSeenStatus } from '../redux/actions/seen_status_actions';
 import ProgressBar from '../components/ProgressBar/ProgressBar';
 import RenderCards from '../components/RenderCards';
 import Loading from '../components/LoadingComponent';
+import PleaseLogin from '../components/PleaseLoginComponent';
 
 // import { Redirect } from 'react-router-dom'; -- look for alternative
 
@@ -39,7 +40,11 @@ const Home = ({ navigation }) => {
   const seenStatusSlice = useSelector((state) => state?.seenStatus);
   const [seenStatus, setSeenStatus] = useState(seenStatusSlice?.seenStatus);
   useEffect(() => {
-    setSeenStatus(seenStatusSlice?.seenStatus);
+    try {
+      setSeenStatus(seenStatusSlice?.seenStatus);
+    } catch (e) {
+      console.log(e);
+    }
   }, [seenStatusSlice]);
   useEffect(() => {
     dispatch(getSeenStatus());
@@ -96,22 +101,10 @@ const Home = ({ navigation }) => {
 
   if (!films) {
     return <Loading />;
+  } else if (!user.user.token) {
+    navigation.navigate('Profile');
+    return <PleaseLogin navigation={navigation} />;
   } else {
-    if (films.length > 0) {
-      // totalFilms = films.length
-      // totalSeen = films.filter(film => seenStatus[film.imdbID]===true).length;
-      // totalSkipped = films.filter(film => seenStatus[film.imdbID]===false).length;
-      // totalUnseen = films.filter(film => typeof (seenStatus[film.imdbID])!=='boolean').length;
-    }
-
-    // const showTheseFilms = showSet.showSet;
-    // const titlesToSearch = films.filter(film => film.title.toLowerCase().includes(searchTitle.toLowerCase()))
-    // const filmsSeen = titlesToSearch.filter(film => seenStatus[film.imdbID]===true);
-    // const filmsSkipped = titlesToSearch.filter(film => seenStatus[film.imdbID]===false);
-    // const filmsToSee = titlesToSearch.filter(film => typeof (seenStatus[film.imdbID])!=='boolean');
-
-    // Perhaps some code to redirect if not logged in?
-
     return (
       <View style={{ flex: 1 }}>
         <ProgressBar

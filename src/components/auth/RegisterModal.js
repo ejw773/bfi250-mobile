@@ -16,9 +16,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
   const dispatch = useDispatch();
 
   const handleRegister = () => {
-    dispatch(register(name, email, password)).then(() => {
-      toggleRegister();
-    });
+    dispatch(register(name, email, password));
   };
 
   return (
@@ -53,13 +51,6 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
             leftIconContainerStyle={styles.formIcon}
             secureTextEntry={true}
           />
-          {/* <CheckBox 
-                title='Remember Me'
-                center
-                checked={remember}
-                onPress={() => setRemember(!remember)}
-                containerStyle={styles.formCheckbox}
-            /> */}
           <View style={styles.formButton}>
             <Button
               style={styles.formButton}
