@@ -4,39 +4,6 @@ import { Card, ListItem } from 'react-native-elements';
 
 const About = () => {
     
-    const techs = [
-        {
-            techName: 'React',
-            link: '',
-            image: ''
-        },
-        {
-            techName: 'Redux',
-            link: '',
-            image: ''
-        },
-        {
-            techName: 'Bootstrap',
-            link: '',
-            image: ''
-        },
-        {
-            techName: 'Node',
-            link: '',
-            image: ''
-        },
-        {
-            techName: 'Express',
-            link: '',
-            image: ''
-        },
-        {
-            techName: 'MongoDB',
-            link: '',
-            image: ''
-        },
-    ]
-
     const repos = [
         {
             repo: 'Frontend',
@@ -89,14 +56,20 @@ const About = () => {
                     * Mobile-friendly.
                 </Text>
                 <Text style={{margin: 10}}>
-                    * A button to "Skip" films I don't intend to see.
+                    * A "Skip" button for films I don't intend to see.
                 </Text>
 
             </Card>
             <Card>
                 <Card.Title>Technologies</Card.Title>
                 <Card.Divider />
-                <FlatList />
+                <Text>React</Text>
+                <Text>Redux</Text>
+                <Text>Bootstrap</Text>
+                <Text>Node</Text>
+                <Text>Express</Text>
+                <Text>MongoDB</Text>
+                <Text>Mongoose</Text>
             </Card>
             <Card>
                 <Card.Title>Deployment</Card.Title>
@@ -106,7 +79,10 @@ const About = () => {
             <Card>
                 <Card.Title>Code</Card.Title>
                 <Card.Divider />
-                <FlatList />
+                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}>Frontend on GitHub</Text>
+                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}>Backend on GitHub</Text>
+                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-mobile')}>Mobile on GitHub</Text>
+                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('')}>Mobile on Snack</Text>
             </Card>
             <Card>
                 <Card.Title>Me</Card.Title>
@@ -118,5 +94,7 @@ const About = () => {
         </ScrollView>
     )
 }
+
+
 
 export default About
