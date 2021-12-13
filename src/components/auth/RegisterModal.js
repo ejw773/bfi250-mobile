@@ -56,6 +56,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
                 value={password}
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
+                secureTextEntry={true}
             />
             {/* <CheckBox 
                 title='Remember Me'

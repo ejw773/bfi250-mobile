@@ -3,9 +3,9 @@ import { API_URL } from '../api/apiUrl'
 import authHeader from './auth-header'
 
 const getSeenStatus = async () => {
-    const theString = await authHeader();
+    const tokenString = await authHeader();
     try {
-        const response = await axios.get(API_URL + 'seenstatus', { headers: theString })
+        const response = await axios.get(API_URL + 'seenstatus', { headers: tokenString })
         return response.data  
     } catch (e) {
         console.log(e)
@@ -14,9 +14,9 @@ const getSeenStatus = async () => {
 }
 
 const deleteSeenStatus = async (imdbID) => {
-    const theString = await authHeader();
+    const tokenString = await authHeader();
     try {
-        const response = await axios.delete(API_URL + 'seenstatus/film/' + imdbID, { headers: theString })
+        const response = await axios.delete(API_URL + 'seenstatus/film/' + imdbID, { headers: tokenString })
         return response
     } catch (e) {
         console.log(e)
@@ -25,13 +25,13 @@ const deleteSeenStatus = async (imdbID) => {
 }
 
 const updateSeenStatus = async (film, seenStatus) => {
-    const theString = await authHeader();
+    const tokenString = await authHeader();
     try {
         const response = await axios.post(API_URL + 'seenstatus/', {
             film,
             seenStatus 
         }, {
-            headers: theString
+            headers: tokenString
         })
         return response
     } catch (e) {

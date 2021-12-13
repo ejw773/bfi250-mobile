@@ -49,6 +49,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                     textContentType='password'
+                    secureTextEntry={true}
                 />
                 <View style={styles.formButton}>
                     <Button 

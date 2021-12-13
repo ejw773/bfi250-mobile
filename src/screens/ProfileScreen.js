@@ -150,7 +150,7 @@ const Profile = ({navigation}) => {
                         <Picker.Item label="1992 (10 Films)" value="bfi1992" />
                         <Picker.Item label="2002 (11 Films)" value="bfi2002" />
                         <Picker.Item label="2012 (250 Films)" value="bfi2012" />
-                        <Picker.Item label="2022 (0 Films)" value="bfi2022" />
+                        {/* <Picker.Item label="2022 (0 Films)" value="bfi2022" /> */}
                     </Picker>
                     <Button
                         buttonStyle={{backgroundColor: 'green'}}

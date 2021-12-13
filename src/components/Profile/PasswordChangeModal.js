@@ -18,7 +18,8 @@ const PasswordChangeModal = (props) => {
                         style={styles.textInput}
                         placeholder='New Password' 
                         value={passwordText} 
-                        onChangeText={(value) => setPasswordText(value)} 
+                        onChangeText={(value) => setPasswordText(value)}
+                        secureTextEntry={true}
                     />    
                     <Card.Divider/>
                     <Button style={styles.formButton} title="Change Password" onPress={handlePasswordChange} />
