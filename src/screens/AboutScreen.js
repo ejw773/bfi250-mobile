@@ -1,24 +1,8 @@
 import React from 'react';
-import { ScrollView, Text, View, FlatList } from 'react-native';
-import { Card, ListItem } from 'react-native-elements';
+import { ScrollView, Text, Linking, StyleSheet } from 'react-native';
+import { Card } from 'react-native-elements';
 
 const About = () => {
-    
-    const repos = [
-        {
-            repo: 'Frontend',
-            location: ''
-        },
-        {
-            repo: 'Backend',
-            location: ''
-        },
-        {
-            repo: 'Mobile App',
-            location: ''
-        }
-    ]
-
     const socialMedia = [
         {
             media: "LinkedIn",
@@ -63,13 +47,13 @@ const About = () => {
             <Card>
                 <Card.Title>Technologies</Card.Title>
                 <Card.Divider />
-                <Text>React</Text>
-                <Text>Redux</Text>
-                <Text>Bootstrap</Text>
-                <Text>Node</Text>
-                <Text>Express</Text>
-                <Text>MongoDB</Text>
-                <Text>Mongoose</Text>
+                <Text>* React</Text>
+                <Text>* Redux</Text>
+                <Text>* Bootstrap</Text>
+                <Text>* Node</Text>
+                <Text>* Express</Text>
+                <Text>* MongoDB</Text>
+                <Text>* Mongoose</Text>
             </Card>
             <Card>
                 <Card.Title>Deployment</Card.Title>
@@ -79,22 +63,33 @@ const About = () => {
             <Card>
                 <Card.Title>Code</Card.Title>
                 <Card.Divider />
-                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}>Frontend on GitHub</Text>
-                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}>Backend on GitHub</Text>
-                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-mobile')}>Mobile on GitHub</Text>
-                <Text style={{color: 'blue'}} onPress={() => Linking.openURL('')}>Mobile on Snack</Text>
+                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250')}>Frontend on GitHub</Text>
+                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-node-server')}>Backend on GitHub</Text>
+                <Text style={styles.linkText} onPress={() => Linking.openURL('https://github.com/ejw773/bfi250-mobile')}>Mobile on GitHub</Text>
+                <Text style={styles.linkText} onPress={() => Linking.openURL('https://snack.expo.dev/@ejw773/github.com-ejw773-bfi250-mobile')}>Mobile on Snack</Text>
             </Card>
             <Card>
                 <Card.Title>Me</Card.Title>
-                <Text>
+                <Card.Divider />
+                <Text style={styles.marginBottom}>
                     I am a full-stack developer based out of Greenville, South Carolina, with a passion for cinema and for learning new things.
                 </Text>
+                <Card.Divider />
+                <Text style={styles.linkText} onPress={() => Linking.openURL('https://www.elijahwilcott.com/')}>elijahwilcott.com</Text>
 
             </Card>
         </ScrollView>
     )
 }
 
-
+const styles = StyleSheet.create({
+    linkText: {
+        color: 'blue',
+        textAlign: 'center'
+    },
+    marginBottom: {
+        marginBottom: 10
+    }
+})
 
 export default About
