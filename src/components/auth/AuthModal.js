@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Button, StyleSheet, Text, Modal } from 'react-native';
-import { Input, CheckBox } from 'react-native-elements';
+import { View, StyleSheet, Text, Modal } from 'react-native';
+import { Input, Button, CheckBox } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../../globalSettings/color'
 import { login } from '../../redux/actions/auth';
+import { clearMessage } from '../../redux/actions/message'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 
@@ -23,9 +24,11 @@ const AuthModal = () => {
 
     const toggleLogin = () => {
         setShowLogin(!showLogin)
+        dispatch(clearMessage())
     }
     const toggleRegister = () => {
         setShowRegister(!showRegister)
+        dispatch(clearMessage())
     }
 
 
@@ -36,14 +39,12 @@ const AuthModal = () => {
                 <Button
                     onPress={() => toggleLogin()}
                     title="Log In"
-                    color={masterColor}
                 />
             </View>
             <View style={styles.formButton}>
                 <Button
                     onPress={() => toggleRegister()}
                     title="Register"
-                    color={masterColor}
                 />
             </View>
             <LoginModal 

@@ -6,7 +6,6 @@ const getMyProfile = async () => {
     const theString = await authHeader();
     try {
         const response = await axios.get(API_URL + 'users/me', { headers: theString });
-        console.log(response)
         return response
     } catch (e) {
         console.log(e)

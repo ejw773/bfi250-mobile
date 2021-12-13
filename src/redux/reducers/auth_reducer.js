@@ -87,15 +87,20 @@ import {
           isLoggedIn: false,
           user: null
         };
-        case DELETE_ACCOUNT:
-          return {
-            ...state,
-            isLoggedIn: false,
-            user: null
-          };
-        case CHANGE_EMAIL:
-        console.log('changing email')
-        return state
+      case DELETE_ACCOUNT:
+        return {
+          ...state,
+          isLoggedIn: false,
+          user: null
+        };
+      case CHANGE_EMAIL:
+        return {
+          ...state,
+          user: {
+            ...state.user,
+              email: action.payload.newEmail
+          }
+        }
       case CHANGE_NAME:
         return {
           ...state, 
@@ -112,7 +117,6 @@ import {
             filmSet: action.payload.newSet
         }
       };
-
       default:
         return state;
     }
