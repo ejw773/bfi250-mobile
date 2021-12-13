@@ -1,1 +1,1 @@
-export const masterColor = 'blue'
+export const masterColor = 'blue';

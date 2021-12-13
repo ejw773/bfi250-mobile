@@ -9,48 +9,48 @@ import Loading from '../components/LoadingComponent';
 
 // import { Redirect } from 'react-router-dom'; -- look for alternative
 
-const Home = ({navigation}) => {
-  const dispatch = useDispatch()
-  const showSet = useSelector((state => state.showSet))
-  const searchTitle = useSelector((state) => state.searchTitle.title)
+const Home = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const showSet = useSelector((state) => state.showSet);
+  const searchTitle = useSelector((state) => state.searchTitle.title);
 
   // Get Film Set from User Prefs
-  const user = useSelector((state) => state.auth)
-  const [filmSet, setFilmSet] = useState(user?.user?.filmSet)
+  const user = useSelector((state) => state.auth);
+  const [filmSet, setFilmSet] = useState(user?.user?.filmSet);
   useEffect(() => {
     try {
-      setFilmSet(user.user.filmSet)
+      setFilmSet(user.user.filmSet);
     } catch {
       // Try later
     }
-  }, [user.user])
+  }, [user.user]);
 
   // Get Film Data, and narrow to selected set
-  const allFilms = useSelector((state) => state?.movieData?.films)
-  const [films, setFilms] = useState([])
+  const allFilms = useSelector((state) => state?.movieData?.films);
+  const [films, setFilms] = useState([]);
   useEffect(() => {
-    dispatch(getFilms())
-  }, [dispatch])
+    dispatch(getFilms());
+  }, [dispatch]);
   useEffect(() => {
-    setFilms(allFilms?.[filmSet])
-  }, [allFilms, filmSet])
+    setFilms(allFilms?.[filmSet]);
+  }, [allFilms, filmSet]);
 
   // Get Seen Status
-  const seenStatusSlice = useSelector((state) => state?.seenStatus)
-  const [seenStatus, setSeenStatus] = useState(seenStatusSlice?.seenStatus)
+  const seenStatusSlice = useSelector((state) => state?.seenStatus);
+  const [seenStatus, setSeenStatus] = useState(seenStatusSlice?.seenStatus);
   useEffect(() => {
-    setSeenStatus(seenStatusSlice?.seenStatus)
-  }, [seenStatusSlice])
+    setSeenStatus(seenStatusSlice?.seenStatus);
+  }, [seenStatusSlice]);
   useEffect(() => {
-      dispatch(getSeenStatus())
-  }, [dispatch, user])
+    dispatch(getSeenStatus());
+  }, [dispatch, user]);
 
-  const [totalFilms, setTotalFilms] = useState(0)
-  const [totalSeen, setTotalSeen] = useState(0)
-  const [totalSkipped, setTotalSkipped] = useState(0)
-  const [totalUnseen, setTotalUnseen] = useState(0)
+  const [totalFilms, setTotalFilms] = useState(0);
+  const [totalSeen, setTotalSeen] = useState(0);
+  const [totalSkipped, setTotalSkipped] = useState(0);
+  const [totalUnseen, setTotalUnseen] = useState(0);
 
-  const [showTheseFilms, setShowTheseFilms] = useState(showSet.showSet)
+  const [showTheseFilms, setShowTheseFilms] = useState(showSet.showSet);
   const [titlesToSearch, setTitlesToSearch] = useState([]);
   const [filmsSeen, setFilmsSeen] = useState([]);
   const [filmsSkipped, setFilmsSkipped] = useState([]);
@@ -58,34 +58,50 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     try {
-      setTotalFilms(films.length)
-      setTotalSeen(films.filter(film => seenStatus[film.imdbID]===true).length)
-      setTotalSkipped(films.filter(film => seenStatus[film.imdbID]===false).length)
-      setTotalUnseen(films.filter(film => typeof (seenStatus[film.imdbID])!=='boolean').length)
-      setTitlesToSearch(films.filter(film => film.title.toLowerCase().includes(searchTitle.toLowerCase())));
-      setFilmsSeen(titlesToSearch.filter(film => seenStatus[film.imdbID]===true));
-      setFilmsSkipped(titlesToSearch.filter(film => seenStatus[film.imdbID]===false));
-      setFilmsToSee(titlesToSearch.filter(film => typeof (seenStatus[film.imdbID])!=='boolean'));  
+      setTotalFilms(films.length);
+      setTotalSeen(
+        films.filter((film) => seenStatus[film.imdbID] === true).length
+      );
+      setTotalSkipped(
+        films.filter((film) => seenStatus[film.imdbID] === false).length
+      );
+      setTotalUnseen(
+        films.filter((film) => typeof seenStatus[film.imdbID] !== 'boolean')
+          .length
+      );
+      setTitlesToSearch(
+        films.filter((film) =>
+          film.title.toLowerCase().includes(searchTitle.toLowerCase())
+        )
+      );
+      setFilmsSeen(
+        titlesToSearch.filter((film) => seenStatus[film.imdbID] === true)
+      );
+      setFilmsSkipped(
+        titlesToSearch.filter((film) => seenStatus[film.imdbID] === false)
+      );
+      setFilmsToSee(
+        titlesToSearch.filter(
+          (film) => typeof seenStatus[film.imdbID] !== 'boolean'
+        )
+      );
     } catch {
       // Try Later
     }
-  }, [films, seenStatus])
+  }, [films, seenStatus]);
 
   useEffect(() => {
-    setShowTheseFilms(showSet.showSet)
-  }, [showSet.showSet])
+    setShowTheseFilms(showSet.showSet);
+  }, [showSet.showSet]);
 
   if (!films) {
-      return (
-          <Loading />
-      )
+    return <Loading />;
   } else {
-
     if (films.length > 0) {
-        // totalFilms = films.length
-        // totalSeen = films.filter(film => seenStatus[film.imdbID]===true).length;
-        // totalSkipped = films.filter(film => seenStatus[film.imdbID]===false).length;
-        // totalUnseen = films.filter(film => typeof (seenStatus[film.imdbID])!=='boolean').length;
+      // totalFilms = films.length
+      // totalSeen = films.filter(film => seenStatus[film.imdbID]===true).length;
+      // totalSkipped = films.filter(film => seenStatus[film.imdbID]===false).length;
+      // totalUnseen = films.filter(film => typeof (seenStatus[film.imdbID])!=='boolean').length;
     }
 
     // const showTheseFilms = showSet.showSet;
@@ -94,30 +110,30 @@ const Home = ({navigation}) => {
     // const filmsSkipped = titlesToSearch.filter(film => seenStatus[film.imdbID]===false);
     // const filmsToSee = titlesToSearch.filter(film => typeof (seenStatus[film.imdbID])!=='boolean');
 
-  // Perhaps some code to redirect if not logged in?
+    // Perhaps some code to redirect if not logged in?
 
-      return (
-        <View style={{ flex: 1 }}>
-            <ProgressBar 
-              totalFilms={totalFilms}
-              totalSeen={totalSeen}
-              totalSkipped={totalSkipped}
-              totalUnseen={totalUnseen}
-              filmSet={filmSet}
-            />
-          {
-            showTheseFilms==='seen' ?
-            <RenderCards filmsToDisplay={filmsSeen} /> :
-            showTheseFilms==='skipped' ?
-            <RenderCards filmsToDisplay={filmsSkipped} /> :
-            showTheseFilms==='unseen' ?
-            <RenderCards filmsToDisplay={filmsToSee} /> :
-            <RenderCards filmsToDisplay={titlesToSearch} />
-          }
-          <RenderCards />
-        </View>
-      )
-    } 
-}
+    return (
+      <View style={{ flex: 1 }}>
+        <ProgressBar
+          totalFilms={totalFilms}
+          totalSeen={totalSeen}
+          totalSkipped={totalSkipped}
+          totalUnseen={totalUnseen}
+          filmSet={filmSet}
+        />
+        {showTheseFilms === 'seen' ? (
+          <RenderCards filmsToDisplay={filmsSeen} />
+        ) : showTheseFilms === 'skipped' ? (
+          <RenderCards filmsToDisplay={filmsSkipped} />
+        ) : showTheseFilms === 'unseen' ? (
+          <RenderCards filmsToDisplay={filmsToSee} />
+        ) : (
+          <RenderCards filmsToDisplay={titlesToSearch} />
+        )}
+        <RenderCards />
+      </View>
+    );
+  }
+};
 
-export default Home
+export default Home;
