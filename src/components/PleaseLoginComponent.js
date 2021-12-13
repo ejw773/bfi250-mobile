@@ -1,11 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import { masterColor } from '../globalSettings/color';
 
-function Empty() {
+function PleaseLogin({ navigation }) {
   return (
     <View style={styles.loadingView}>
-      <Text style={styles.loadingText}>Nothing to See Here....</Text>
+      <Text style={styles.loadingText}>Please Log In</Text>
+      <Button
+        title='Login Page'
+        onPress={() => navigation.navigate('Profile')}
+      />
     </View>
   );
 }
@@ -18,9 +23,10 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     color: masterColor,
-    fontSize: 15,
+    fontSize: 24,
     fontWeight: 'bold',
+    margin: 20,
   },
 });
 
-export default Empty;
+export default PleaseLogin;

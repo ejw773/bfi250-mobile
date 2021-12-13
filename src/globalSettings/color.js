@@ -1,1 +1,1 @@
-export const masterColor = '#DCA57D'
+export const masterColor = 'blue';
