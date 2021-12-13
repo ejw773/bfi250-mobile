@@ -67,7 +67,7 @@ const About = () => {
       </Card>
       <Card>
         <Card.Title>
-          Code <Ionicons name='logo-github' />{' '}
+          Code Links <Ionicons name='logo-github' />{' '}
         </Card.Title>
         <Card.Divider />
         <Button
@@ -109,7 +109,8 @@ const About = () => {
         <Card.Divider />
         <Text style={styles.marginBottom}>
           I am a full-stack developer based out of Greenville, South Carolina,
-          with a passion for cinema and for learning new things.
+          with a passion for cinema and for learning new things. This project
+          was completed as part of my course work for Nucamp Coding Bootamp.
         </Text>
         <Card.Divider />
         <Button

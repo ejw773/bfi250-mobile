@@ -15,7 +15,6 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
   const handleLogin = async () => {
     try {
       const response = await dispatch(login(email, password));
-      console.log(response);
       toggleLogin();
     } catch (error) {
       console.log(error);
