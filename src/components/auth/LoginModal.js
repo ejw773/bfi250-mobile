@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { View, Button, StyleSheet, Text, Modal } from 'react-native';
-import { Input, CheckBox } from 'react-native-elements';
-import * as SecureStore from 'expo-secure-store';
+import { View, StyleSheet, Text, Modal } from 'react-native';
+import { Input, CheckBox, Button } from 'react-native-elements';
+// import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../../globalSettings/color'
 import { login } from '../../redux/actions/auth';
 
 const LoginModal = ({ showLogin, toggleLogin }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [remember, setRemember] = useState(false);
+    // const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -20,53 +20,53 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
 
 
     return (
-        <View>
-        <Modal
-        visible={showLogin}
-        onRequestClose={() => toggleLogin}
-        >
         <View style={styles.container}>
-            <Input 
-                placeholder='Email'
-                leftIcon={{type: 'font-awesome', email: 'user-o'}}
-                autoCapitalize='none'
-                onChangeText={email => setEmail(email)}
-                value={email}
-                containerStyle={styles.formInput}
-                leftIconContainerStyle={styles.formIcon}
-            />
-            <Input 
-                placeholder='Password'
-                leftIcon={{type: 'font-awesome', name: 'key'}}
-                autoCapitalize='none'
-                onChangeText={password => setPassword(password)}
-                value={password}
-                containerStyle={styles.formInput}
-                leftIconContainerStyle={styles.formIcon}
-            />
-            <CheckBox 
-                title='Remember Me'
-                center
-                checked={remember}
-                onPress={() => setRemember(!remember)}
-                containerStyle={styles.formCheckbox}
-            />
-            <View style={styles.formButton}>
-                <Button 
-                    onPress={() => handleLogin()}
-                    title='Login'
-                    color={masterColor}
+        <Modal
+            visible={showLogin}
+            onRequestClose={() => toggleLogin}
+        >
+            <View style={styles.container}>
+                <Input 
+                    placeholder='Email'
+                    leftIcon={{type: 'font-awesome', name: 'envelope-o'}}
+                    autoCapitalize='none'
+                    onChangeText={email => setEmail(email)}
+                    value={email}
+                    containerStyle={styles.formInput}
+                    leftIconContainerStyle={styles.formIcon}
                 />
-            </View>
-            <View style={styles.formButton}>
-                <Button 
-                    onPress={() => toggleLogin()}
-                    title='Cancel'
-                    color={masterColor}
+                <Input 
+                    placeholder='Password'
+                    leftIcon={{type: 'font-awesome', name: 'key'}}
+                    autoCapitalize='none'
+                    onChangeText={password => setPassword(password)}
+                    value={password}
+                    containerStyle={styles.formInput}
+                    leftIconContainerStyle={styles.formIcon}
                 />
+                {/* <CheckBox 
+                    title='Remember Me'
+                    center
+                    checked={remember}
+                    onPress={() => setRemember(!remember)}
+                    containerStyle={styles.formCheckbox}
+                /> */}
+                <View style={styles.formButton}>
+                    <Button 
+                        style={styles.formButton}
+                        onPress={() => handleLogin()}
+                        title='Login'
+                        color={masterColor}
+                    />
+                    <Button 
+                        style={styles.formButton}
+                        onPress={() => toggleLogin()}
+                        title='Cancel'
+                        color={masterColor}
+                    />
+                </View>
             </View>
-        </View>
-    </Modal>
+        </Modal>
     </View>
     
     )
@@ -75,6 +75,7 @@ const LoginModal = ({ showLogin, toggleLogin }) => {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
+        marginTop: 100,
         margin: 20
     },
     formIcon: {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: null
     },
     formButton: {
-        margin: 40
+        margin: 20
     }
 })
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { View, Button, StyleSheet, Text, Modal } from 'react-native';
-import { Input, CheckBox } from 'react-native-elements';
-import * as SecureStore from 'expo-secure-store';
+import { View, StyleSheet, Text, Modal } from 'react-native';
+import { Input, Button, CheckBox } from 'react-native-elements';
+// import * as SecureStore from 'expo-secure-store';
 import { masterColor } from '../../globalSettings/color'
 import { register } from '../../redux/actions/auth';
 
@@ -10,7 +10,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [remember, setRemember] = useState(false);
+    // const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
 
 
     return (
-        <View>
+        <View style={styles.container}>
         <Modal
         visible={showRegister}
         onRequestClose={() => toggleRegister}
@@ -31,7 +31,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
         <View style={styles.container}>
             <Input 
                 placeholder='Enter User Name'
-                leftIcon={{type: 'font-awesome', email: 'user-o'}}
+                leftIcon={{type: 'font-awesome', name: 'user-o'}}
                 autoCapitalize='none'
                 onChangeText={name => setName(name)}
                 value={name}
@@ -40,7 +40,7 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
             />
             <Input 
                 placeholder='Enter Email'
-                leftIcon={{type: 'font-awesome', email: 'user-o'}}
+                leftIcon={{type: 'font-awesome', name: 'envelope-o'}}
                 autoCapitalize='none'
                 onChangeText={email => setEmail(email)}
                 value={email}
@@ -56,20 +56,22 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
             />
-            <CheckBox 
+            {/* <CheckBox 
                 title='Remember Me'
                 center
                 checked={remember}
                 onPress={() => setRemember(!remember)}
                 containerStyle={styles.formCheckbox}
-            />
+            /> */}
             <View style={styles.formButton}>
                 <Button 
+                    style={styles.formButton}
                     onPress={() => handleRegister()}
                     title='Register'
                     color={masterColor}
                 />
                 <Button 
+                    style={styles.formButton}
                     onPress={() => toggleRegister()}
                     title='Cancel'
                     color={masterColor}
@@ -85,7 +87,8 @@ const LoginModal = ({ showRegister, toggleRegister }) => {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        margin: 20
+        margin: 20,
+        marginTop: 100
     },
     formIcon: {
         marginRight: 10
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
         backgroundColor: null
     },
     formButton: {
-        margin: 40
+        margin: 20
     }
 })
 

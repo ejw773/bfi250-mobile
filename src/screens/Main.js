@@ -13,7 +13,6 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
-  const user = useSelector((state) => state.auth)
   const dispatch = useDispatch();
   
   const getUserData = async () => {
@@ -31,7 +30,7 @@ const Main = () => {
   return (
       <NavigationContainer>
       <Tab.Navigator initialRouteName="Profile">
-        <Tab.Screen name="Home" component={Home} options={{ title: 'BFI 250 Progress Bar'}}/>
+        <Tab.Screen name="Home" component={Home} options={{ title: 'Progress Bar'}}/>
         <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="About" component={About} />
       </Tab.Navigator>
