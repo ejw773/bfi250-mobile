@@ -101,7 +101,7 @@ const Home = ({ navigation }) => {
 
   if (!films) {
     return <Loading />;
-  } else if (!user.user.token) {
+  } else if (!user?.user?.token) {
     navigation.navigate('Profile');
     return <PleaseLogin navigation={navigation} />;
   } else {
