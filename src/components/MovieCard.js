@@ -28,11 +28,13 @@ const MovieCard = ({ item, status }) => {
           <Image style={styles.imageStyle} source={{ uri: item.poster }} />
         </TouchableOpacity>
       </View>
-      <View style={{ paddingTop: 30 }}>
+      <View style={{ paddingTop: 30, paddingLeft: 10 }}>
         <BadgeComponent style={styles.badgeStyle} status={status} />
-        <Text style={{ fontSize: 20 }}>
-          {item.bfiRank}. {item.title}
-        </Text>
+        <View style={{ flexDirection: 'row', paddingTop: 5 }}>
+          <Text style={{ fontSize: 20, flex: 1, flexWrap: 'wrap' }}>
+            {item.bfiRank}. {item.title}
+          </Text>
+        </View>
         <Text>{item.director}</Text>
         <Text>{item.year}</Text>
         <View style={{ alignContent: 'center' }}>
