@@ -93,9 +93,7 @@ const About = () => {
           title='Mobile on Expo Snack'
           style={styles.linkButton}
           onPress={() =>
-            Linking.openURL(
-              'https://snack.expo.dev/@ejw773/github.com-ejw773-bfi250-mobile'
-            )
+            Linking.openURL('https://snack.expo.dev/@ejw773/bfi-250-mobile')
           }
         />
         <Button
