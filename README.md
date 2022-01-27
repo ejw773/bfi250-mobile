@@ -30,6 +30,12 @@ I created the BFI 250 Progress Bar as a way to track my progress through this li
 - Redux
 - Redux Thunk
 
+## 🖥 Screenshots
+
+![image](https://github.com/ejw773/bfi250-mobile/blob/main/assets/screenshots/main.jpg)
+![image](https://github.com/ejw773/bfi250-mobile/blob/main/assets/screenshots/profile.jpg)
+![image](https://github.com/ejw773/bfi250-mobile/blob/main/assets/screenshots/about.jpg)
+
 ## Demo Video
 
 [![BFI 250 Progress Bar Video Demo](http://img.youtube.com/vi/07n1iiyvbys/0.jpg)](https://www.youtube.com/watch?v=QQWt32ibu-s "Video Demo")
